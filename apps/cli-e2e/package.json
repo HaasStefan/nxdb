@@ -1,0 +1,26 @@
+{
+  "name": "@nxdb/cli-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@nxdb/cli"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/cli-e2e/jest.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@nxdb/cli:build",
+          "@nxdb/cli:serve"
+        ]
+      }
+    }
+  }
+}
