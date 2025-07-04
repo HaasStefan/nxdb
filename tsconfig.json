@@ -4,9 +4,6 @@
   "files": [],
   "references": [
     {
-      "path": "./packages/cli-e2e"
-    },
-    {
       "path": "./packages/cli"
     }
   ]
