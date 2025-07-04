@@ -2,6 +2,9 @@
   "name": "@nxdb/cli",
   "version": "0.0.1",
   "private": true,
+  "dependencies": {
+    "commander": "catalog:"
+  },
   "nx": {
     "targets": {
       "build": {
