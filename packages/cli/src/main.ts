@@ -1,5 +1,5 @@
 import { program } from 'commander';
-import { buildDatabaseAsync, printSchema, readSchema } from '@nxdb/db';
+import { buildDatabaseAsync, printSchema, readSchema, resetDatabaseAsync } from '@nxdb/db';
 
 program
   .name('nxdb')
@@ -10,6 +10,13 @@ program
   .command('build')
   .action(async (options) => {
     await buildDatabaseAsync();
+  });
+
+program
+  .command('reset')
+  .description('Resets the NxDB database')
+  .action(async() => {
+    await resetDatabaseAsync();
   });
 
 program

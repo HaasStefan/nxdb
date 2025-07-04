@@ -16,7 +16,7 @@ export async function buildDatabaseAsync() {
 async function getProjectsMapAsync(
   projectGraph: ProjectGraph
 ): Promise<ProjectsMap> {
-  const spinner = ora('Generating DB...').start();
+  const spinner = ora('Generating Database Custom Fields...').start();
 
   try {
     const projectRootMap = createProjectRootMap(projectGraph);
@@ -57,7 +57,7 @@ async function getProjectsMapAsync(
       projectsMap[projectName] = project;
     }
 
-    spinner.succeed(chalk.green('Database was successfully generated!'));
+    spinner.succeed('Database was successfully generated!');
     return projectsMap;
   } catch (error) {
     spinner.fail(chalk.red('Failed to generate DB.'));
@@ -70,7 +70,7 @@ async function generateNxProjectGraphAsync() {
 
   try {
     const projectGraph = await getFreshProjectGraphAsync();
-    spinner.succeed(chalk.green('Nx Project Graph generated successfully!'));
+    spinner.succeed('Nx Project Graph generated successfully!');
     return projectGraph;
   } catch (error) {
     spinner.fail(chalk.red('Failed to generate Nx Project Graph.'));

@@ -17,7 +17,5 @@ export function writeDatabase(projectMap: ProjectsMap) {
     JSON.stringify(projectMap, null, 2)
   );
 
-  console.log(chalk.green(
-    `✔ Database has beeen successfully persisted.`
-  ));
+  console.log(`${chalk.green('✔')} Database has beeen successfully persisted.`);
 }

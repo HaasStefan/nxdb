@@ -3,6 +3,8 @@ import { getNumberOfCommitsAsync } from '../../tools/number-of-commits.mjs';
 import { getLinesOfCode } from '../../tools/lines-of-code.mjs';
 
 export default async function () {
+  await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate async operation
+
   const projectRoot = resolve(import.meta.dirname);
   const numberOfCommits = await getNumberOfCommitsAsync(projectRoot);
   const {
@@ -14,7 +16,6 @@ export default async function () {
     jsonLinesOfCode,
     mdLinesOfCode,
     tsxLinesOfCode,
-    jsxLinesOfCode,
     scssLinesOfCode,
     lessLinesOfCode,
     numberOfFiles,
