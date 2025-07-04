@@ -40,7 +40,6 @@ export default async function () {
     jsonLinesOfCode,
     mdLinesOfCode,
     tsxLinesOfCode,
-    jsxLinesOfCode,
     scssLinesOfCode,
     lessLinesOfCode,
     numberOfFiles,

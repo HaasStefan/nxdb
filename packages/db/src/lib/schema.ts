@@ -19,6 +19,93 @@ export interface Schema {
   };
 }
 
+/**
+ * Singleton class to manage the NxDB schema.
+ * It reads the schema from a JSON file and provides methods to access and validate it.
+ */
+export class SchemaManager {
+  private readonly schema: Schema;
+  private static instance: SchemaManager;
+
+  private constructor() {
+    this.schema = readSchema();
+  }
+
+  static getInstance(): SchemaManager {
+    if (!SchemaManager.instance) {
+      SchemaManager.instance = new SchemaManager();
+    }
+    return SchemaManager.instance;
+  }
+
+  getSchema(): Schema {
+    return this.schema as Readonly<Schema>;
+  }
+
+  getEntry(
+    key: string
+  ): { type: SchemaType; description: string; default: Primitive } | undefined {
+    return this.schema[key];
+  }
+
+  getDefaultValue(key: string): Primitive | undefined {
+    return this.schema[key]?.default;
+  }
+
+  getMissingKeyValuePairs(fields: object) {
+    const missingPairs: Record<string, Primitive> = {};
+    for (const [key, value] of Object.entries(this.schema)) {
+      if (!(key in fields)) {
+        missingPairs[key] = value.default;
+      }
+    }
+    return missingPairs;
+  }
+
+  validateFields(
+    fields: Record<string, unknown>
+  ): Record<string, Primitive> {
+    const validFields = {...fields};
+    for (const [key, value] of Object.entries(fields)) {
+      const schemaEntry = this.schema[key];
+      if (!schemaEntry) {
+        throw new Error(`Unknown field "${key}" in fields.`);
+      }
+
+      const { type, default: defaultValue } = schemaEntry;
+
+      if (typeof value !== type && !Array.isArray(value)) {
+        throw new Error(
+          `Field "${key}" should be of type "${type}", but received "${typeof value}".`
+        );
+      }
+
+      if (Array.isArray(value)) {
+        if (
+          (type === 'string[]' && !value.every((v) => typeof v === 'string')) ||
+          (type === 'number[]' && !value.every((v) => typeof v === 'number')) ||
+          (type === 'boolean[]' && !value.every((v) => typeof v === 'boolean'))
+        ) {
+          throw new Error(
+            `Field "${key}" should be an array of ${type.replace('[]', '')}, but received an array of ${typeof value[0]}.`
+          );
+        }
+      } else if (value === undefined) {
+        validFields[key] = defaultValue;
+      }
+    }
+
+    const missingPairs = this.getMissingKeyValuePairs(validFields);
+    for (const [key, defaultValue] of Object.entries(missingPairs)) {
+      if (validFields[key] === undefined) {
+        validFields[key] = defaultValue;
+      }
+    }
+
+    return validFields as Record<string, Primitive>; 
+  }
+}
+
 export function readSchema(): Schema {
   const schemaJson = resolve('.nxdb.schema.json');
   try {

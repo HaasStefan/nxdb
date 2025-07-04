@@ -1,40 +1,57 @@
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { SchemaManager } from '../schema.js';
 
-export type Primitive = string | number | boolean | string[] | number[] | boolean[];
+export type Primitive =
+  | string
+  | number
+  | boolean
+  | string[]
+  | number[]
+  | boolean[];
 
 interface ESModule {
   default?: unknown;
-};
+}
 
-export async function getCustomFieldsAsync(projectRoot: string): Promise<Record<string, Primitive>> {
+export async function getCustomFieldsAsync(
+  projectRoot: string
+): Promise<Record<string, Primitive>> {
   const nxdbConfigPathMjs = resolve(projectRoot, '.nxdb.config.mjs');
   const nxdbConfigPathJs = resolve(projectRoot, '.nxdb.config.js');
+  const schemaManager = SchemaManager.getInstance();
 
   if (!existsSync(nxdbConfigPathMjs) && !existsSync(nxdbConfigPathJs)) {
-    console.debug(`No custom fields configuration found in ${projectRoot}.`);
-    return {};
+    return schemaManager.getMissingKeyValuePairs({}); 
   }
 
-  const configPath = existsSync(nxdbConfigPathMjs) ? nxdbConfigPathMjs : nxdbConfigPathJs;
+  const configPath = existsSync(nxdbConfigPathMjs)
+    ? nxdbConfigPathMjs
+    : nxdbConfigPathJs;
   const configUrl = pathToFileURL(configPath).href;
 
   const module = await import(configUrl);
   if (!isESModule(module)) {
-    throw new Error(`Invalid custom fields configuration in ${configPath}. Expected an ES module.`);
+    throw new Error(
+      `Invalid custom fields configuration in ${configPath}. Expected an ES module.`
+    );
   }
 
   const { default: fn } = module;
 
   if (typeof fn !== 'function') {
-    throw new Error(`Invalid custom fields configuration in ${configPath}. Expected a function.`);
+    throw new Error(
+      `Invalid custom fields configuration in ${configPath}. Expected a function.`
+    );
   }
 
   const customFields = await fn();
 
   if (typeof customFields !== 'object' || customFields === null) {
-    throw new Error(`Invalid custom fields configuration in ${configPath}. Expected an object.`);
+    throw new Error(
+      `Invalid custom fields configuration in ${configPath}. Expected an object.`
+    );
   }
 
   const result: Record<string, Primitive> = {};
@@ -42,11 +59,13 @@ export async function getCustomFieldsAsync(projectRoot: string): Promise<Record<
     if (isPrimitive(value)) {
       result[key] = value;
     } else {
-      throw new Error(`Invalid custom field value for "${key}" in ${configPath}. Expected a primitive type.`);
+      throw new Error(
+        `Invalid custom field value for "${key}" in ${configPath}. Expected a primitive type.`
+      );
     }
   }
 
-  return result;
+  return schemaManager.validateFields(result);
 }
 
 function isESModule(value: unknown): value is ESModule {
@@ -58,6 +77,12 @@ function isPrimitive(value: unknown): value is Primitive {
     typeof value === 'string' ||
     typeof value === 'number' ||
     typeof value === 'boolean' ||
-    Array.isArray(value) && value.every(item => typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean')
+    (Array.isArray(value) &&
+      value.every(
+        (item) =>
+          typeof item === 'string' ||
+          typeof item === 'number' ||
+          typeof item === 'boolean'
+      ))
   );
 }
