@@ -1,5 +1,4 @@
-packages: 
-  - "packages/*"
-
+packages:
+  - 'packages/*'
 catalog:
-  commander: "^14.0.0"
+  commander: '^14.0.0'

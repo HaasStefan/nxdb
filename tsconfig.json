@@ -5,6 +5,12 @@
   "references": [
     {
       "path": "./packages/cli"
+    },
+    {
+      "path": "./packages/parser"
+    },
+    {
+      "path": "./packages/db"
     }
   ]
 }
