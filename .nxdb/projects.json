@@ -1,0 +1,100 @@
+{
+  "@nxdb/parser": {
+    "name": "@nxdb/parser",
+    "root": "packages/parser",
+    "customFields": {
+      "numberOfCommits": 0,
+      "totalLinesOfCode": 0,
+      "htmlLinesOfCode": 0,
+      "jsLinesOfCode": 0,
+      "tsLinesOfCode": 0,
+      "cssLinesOfCode": 0,
+      "jsonLinesOfCode": 0,
+      "mdLinesOfCode": 0,
+      "tsxLinesOfCode": 0,
+      "jsxLinesOfCode": 0,
+      "scssLinesOfCode": 0,
+      "lessLinesOfCode": 0,
+      "numberOfFiles": 0
+    },
+    "tags": [
+      "npm:private"
+    ],
+    "targetNames": [
+      "typecheck",
+      "build",
+      "build-deps",
+      "watch-deps",
+      "lint",
+      "test"
+    ],
+    "dependencies": [],
+    "dependedByProjects": []
+  },
+  "@nxdb/cli": {
+    "name": "@nxdb/cli",
+    "root": "packages/cli",
+    "customFields": {
+      "numberOfCommits": 5,
+      "totalLinesOfCode": 152,
+      "htmlLinesOfCode": 0,
+      "jsLinesOfCode": 0,
+      "tsLinesOfCode": 37,
+      "cssLinesOfCode": 0,
+      "jsonLinesOfCode": 115,
+      "mdLinesOfCode": 0,
+      "tsxLinesOfCode": 0,
+      "scssLinesOfCode": 0,
+      "lessLinesOfCode": 0,
+      "numberOfFiles": 10,
+      "jsxLinesOfCode": 0
+    },
+    "tags": [
+      "npm:private"
+    ],
+    "targetNames": [
+      "typecheck",
+      "lint",
+      "test",
+      "build"
+    ],
+    "dependencies": [
+      "@nxdb/db"
+    ],
+    "dependedByProjects": []
+  },
+  "@nxdb/db": {
+    "name": "@nxdb/db",
+    "root": "packages/db",
+    "customFields": {
+      "numberOfCommits": 0,
+      "totalLinesOfCode": 0,
+      "htmlLinesOfCode": 0,
+      "jsLinesOfCode": 0,
+      "tsLinesOfCode": 0,
+      "cssLinesOfCode": 0,
+      "jsonLinesOfCode": 0,
+      "mdLinesOfCode": 0,
+      "tsxLinesOfCode": 0,
+      "jsxLinesOfCode": 0,
+      "scssLinesOfCode": 0,
+      "lessLinesOfCode": 0,
+      "numberOfFiles": 0
+    },
+    "tags": [
+      "npm:private"
+    ],
+    "targetNames": [
+      "typecheck",
+      "build",
+      "build-deps",
+      "watch-deps",
+      "lint",
+      "test"
+    ],
+    "dependencies": [],
+    "dependedByProjects": [
+      "@nxdb/cli"
+    ]
+  }
+}
