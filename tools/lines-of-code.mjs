@@ -2,58 +2,58 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 export function getLinesOfCode(projectRoot, ignoreFolders = []) {
-  let totalLines = 0;
-  let htmlLines = 0;
-  let jsLines = 0;
-  let tsLines = 0;
-  let tsxLines = 0;
-  let jsxLines = 0;
-  let cssLines = 0;
-  let scssLines = 0;
-  let lessLines = 0;
-  let jsonLines = 0;
-  let mdLines = 0;
+  let totalLinesOfCode = 0;
+  let htmlLinesOfCode = 0;
+  let jsLinesOfCode = 0;
+  let tsLinesOfCode = 0;
+  let tsxLinesOfCode = 0;
+  let jsxLinesOfCode = 0;
+  let cssLinesOfCode = 0;
+  let scssLinesOfCode = 0;
+  let lessLinesOfCode = 0;
+  let jsonLinesOfCode = 0;
+  let mdLinesOfCode = 0;
 
   const allFiles = getAllFiles(projectRoot, ignoreFolders);
   for (const file of allFiles) {
     const ext = file.split('.').pop();
     if (ext === 'html') {
-      htmlLines += countLines(file);
+      htmlLinesOfCode += countLines(file);
     } else if (ext === 'js') {
-      jsLines += countLines(file);
+      jsLinesOfCode += countLines(file);
     } else if (ext === 'ts') {
-      tsLines += countLines(file);
+      tsLinesOfCode += countLines(file);
     } else if (ext === 'css') {
-      cssLines += countLines(file);
+      cssLinesOfCode += countLines(file);
     } else if (ext === 'json') {
-      jsonLines += countLines(file);
+      jsonLinesOfCode += countLines(file);
     } else if (ext === 'md') {
-      mdLines += countLines(file);
+      mdLinesOfCode += countLines(file);
     } else if (ext === 'tsx') {
-      tsxLines += countLines(file);
+      tsxLinesOfCode += countLines(file);
     } else if (ext === 'jsx') {
-      jsxLines += countLines(file);
+      jsxLinesOfCode += countLines(file);
     } else if (ext === 'scss') {
-      scssLines += countLines(file);
+      scssLinesOfCode += countLines(file);
     } else if (ext === 'less') {
-      lessLines += countLines(file);
+      lessLinesOfCode += countLines(file);
     }
   }
 
-  totalLines = htmlLines + jsLines + tsLines + cssLines + jsonLines + mdLines;
+  totalLinesOfCode = htmlLinesOfCode + jsLinesOfCode + tsLinesOfCode + cssLinesOfCode + jsonLinesOfCode + mdLinesOfCode;
 
   return {
-    totalLines,
-    htmlLines,
-    jsLines,
-    tsLines,
-    cssLines,
-    jsonLines,
-    mdLines,
-    tsxLines,
-    jsxLines,
-    scssLines,
-    lessLines,
+    totalLinesOfCode,
+    htmlLinesOfCode,
+    jsLinesOfCode,
+    tsLinesOfCode,
+    cssLinesOfCode,
+    jsonLinesOfCode,
+    mdLinesOfCode,
+    tsxLinesOfCode,
+    jsxLinesOfCode,
+    scssLinesOfCode,
+    lessLinesOfCode,
     numberOfFiles: allFiles.length
   };
 }

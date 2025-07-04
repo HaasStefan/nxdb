@@ -1,5 +1,5 @@
 import { program } from 'commander';
-import { buildDatabaseAsync } from '@nxdb/db';
+import { buildDatabaseAsync, printSchema, readSchema } from '@nxdb/db';
 
 program
   .name('nxdb')
@@ -10,6 +10,14 @@ program
   .command('build')
   .action(async (options) => {
     await buildDatabaseAsync();
+  });
+
+program
+  .command('schema')
+  .description('Prints the schema of the NxDB database')
+  .action(() => {
+    const schema = readSchema();
+    printSchema(schema);
   });
 
 program.parse(process.argv); 

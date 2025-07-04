@@ -1,0 +1,67 @@
+{
+  "numberOfCommits": {
+    "type": "number",
+    "description": "The total number of commits in the project in the last 30 days.",
+    "default": 0
+  },
+  "totalLinesOfCode": {
+    "type": "number",
+    "description": "The total number of lines of code in the project.",
+    "default": 0
+  },
+  "htmlLinesOfCode": {
+    "type": "number",
+    "description": "The number of lines of HTML code in the project.",
+    "default": 0
+  },
+  "jsLinesOfCode": {
+    "type": "number",
+    "description": "The number of lines of JavaScript code in the project.",
+    "default": 0
+  },
+  "tsLinesOfCode": {
+    "type": "number",
+    "description": "The number of lines of TypeScript code in the project.",
+    "default": 0
+  },
+  "cssLinesOfCode": {
+    "type": "number",
+    "description": "The number of lines of CSS code in the project.",
+    "default": 0
+  },
+  "jsonLinesOfCode": {
+    "type": "number",
+    "description": "The number of lines of JSON code in the project.", 
+    "default": 0
+  },
+  "mdLinesOfCode": {
+    "type": "number",
+    "description": "The number of lines of Markdown code in the project.",
+    "default": 0
+  },
+  "tsxLinesOfCode": {
+    "type": "number",
+    "description": "The number of lines of TypeScript JSX code in the project.",
+    "default": 0
+  },
+  "jsxLinesOfCode": {
+    "type": "number",
+    "description": "The number of lines of JavaScript JSX code in the project.",
+    "default": 0
+  },
+  "scssLinesOfCode": {
+    "type": "number",
+    "description": "The number of lines of SCSS code in the project.",
+    "default": 0
+  },
+  "lessLinesOfCode": {
+    "type": "number",
+    "description": "The number of lines of LESS code in the project.",
+    "default": 0
+  },
+  "numberOfFiles": {
+    "type": "number",
+    "description": "The total number of files in the project.",
+    "default": 0 
+  }
+}
