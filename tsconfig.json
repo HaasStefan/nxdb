@@ -4,10 +4,10 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/cli-e2e"
+      "path": "./packages/cli-e2e"
     },
     {
-      "path": "./apps/cli"
+      "path": "./packages/cli"
     }
   ]
 }

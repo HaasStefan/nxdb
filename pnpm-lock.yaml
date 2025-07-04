@@ -91,9 +91,9 @@ importers:
         specifier: ^8.29.0
         version: 8.35.1(eslint@9.30.1)(typescript@5.8.3)
 
-  apps/cli: {}
+  packages/cli: {}
 
-  apps/cli-e2e: {}
+  packages/cli-e2e: {}
 
 packages:
 
