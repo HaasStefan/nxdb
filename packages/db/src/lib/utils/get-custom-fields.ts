@@ -25,7 +25,13 @@ export async function getCustomFieldsAsync(projectRoot: string): Promise<Record<
     throw new Error(`Invalid custom fields configuration in ${configPath}. Expected an ES module.`);
   }
 
-  const { default: customFields } = module;
+  const { default: fn } = module;
+
+  if (typeof fn !== 'function') {
+    throw new Error(`Invalid custom fields configuration in ${configPath}. Expected a function.`);
+  }
+
+  const customFields = await fn();
 
   if (typeof customFields !== 'object' || customFields === null) {
     throw new Error(`Invalid custom fields configuration in ${configPath}. Expected an object.`);
