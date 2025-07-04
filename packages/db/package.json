@@ -16,6 +16,9 @@
     }
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "ora": "catalog:",
+    "chalk": "catalog:",
+    "@nx/devkit": "catalog:"
   }
 }

@@ -1,1 +1,2 @@
-export * from './lib/db.js';
+
+export { buildDatabaseAsync } from './lib/builder.js';

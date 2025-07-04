@@ -2,8 +2,10 @@
   "name": "@nxdb/cli",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "dependencies": {
-    "commander": "catalog:"
+    "commander": "catalog:",
+    "@nxdb/db": "workspace:*"
   },
   "nx": {
     "targets": {
@@ -17,7 +19,7 @@
           "platform": "node",
           "outputPath": "packages/cli/dist",
           "format": [
-            "cjs"
+            "esm"
           ],
           "bundle": false,
           "main": "packages/cli/src/main.ts",
@@ -41,26 +43,6 @@
                 ".js": ".js"
               }
             }
-          }
-        }
-      },
-      "serve": {
-        "continuous": true,
-        "executor": "@nx/js:node",
-        "defaultConfiguration": "development",
-        "dependsOn": [
-          "build"
-        ],
-        "options": {
-          "buildTarget": "@nxdb/cli:build",
-          "runBuildTargetDependencies": false
-        },
-        "configurations": {
-          "development": {
-            "buildTarget": "@nxdb/cli:build:development"
-          },
-          "production": {
-            "buildTarget": "@nxdb/cli:build:production"
           }
         }
       },
