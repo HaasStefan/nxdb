@@ -16,4 +16,7 @@ export default [
       parser: await import('jsonc-eslint-parser'),
     },
   },
+  {
+    ignores: ['src/lib/parser/parser.js'], // Ignore the Peggy-generated parser file
+  },
 ];
