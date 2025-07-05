@@ -6,8 +6,13 @@ import { getCustomFieldsAsync } from './utils/get-custom-fields.js';
 import type { Project, ProjectsMap } from './project.js';
 import { writeDatabase } from './persistence.js';
 
-export async function buildDatabaseAsync() {
-  const projectGraph = await generateNxProjectGraphAsync();
+export async function buildDatabaseAsync(
+  options: { skipGraphComputation?: boolean } = {}
+): Promise<void> {
+  const { skipGraphComputation = false } = options;
+  const projectGraph = skipGraphComputation
+    ? readCachedProjectGraph()
+    : await generateNxProjectGraphAsync();
   const projectsMap = await getProjectsMapAsync(projectGraph);
 
   writeDatabase(projectsMap);
@@ -65,7 +70,7 @@ async function getProjectsMapAsync(
   }
 }
 
-async function generateNxProjectGraphAsync() {
+export async function generateNxProjectGraphAsync() {
   const spinner = ora('Generating Nx Project Graph...').start();
 
   try {
