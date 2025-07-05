@@ -20,6 +20,20 @@ export interface Schema {
 }
 
 /**
+ * Reserved field names that are not allowed to be used as custom fields.
+ * These fields are reserved for internal use by NxDB.
+ */
+const reservedFieldNames = [
+  'name',
+  'root',
+  'customFields',
+  'tags',
+  'targetNames',
+  'dependencies',
+  'dependedByProjects',
+] as const;
+
+/**
  * Singleton class to manage the NxDB schema.
  * It reads the schema from a JSON file and provides methods to access and validate it.
  */
@@ -119,6 +133,12 @@ export function readSchema(): Schema {
     }
 
     for (const [key, value] of Object.entries(parsedSchema)) {
+      if (reservedFieldNames.includes(key as typeof reservedFieldNames[number])) {
+        throw new Error(
+          `Field "${key}" is reserved and cannot be used in the schema.`
+        );
+      }
+      
       if (typeof value !== 'object' || value === null) {
         throw new Error(
           `Invalid schema entry for "${key}" in ${schemaJson}. Expected an object.`
