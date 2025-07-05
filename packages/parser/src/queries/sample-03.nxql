@@ -1,8 +1,1 @@
-SELECT
-  *
-FROM
-  projects
-WHERE
-  'type:library' IN tags
-  OR 'type:app' IN tags
-  AND numberOfCommits > 5
+SELECT * FROM projects WHERE hello = 'world'

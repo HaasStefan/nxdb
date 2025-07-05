@@ -1,66 +1,52 @@
-{
-  function makeLogicalChain(first, rest) {
-    return rest.reduce((acc, [op, expr]) => ({
-      type: op.toUpperCase(),
-      left: acc,
-      right: expr
-    }), first);
-  }
-}
+Start
+  = _ query:Query _ { return query; }
 
 Query
-  = _ "SELECT"i _ selection:Selection _ "FROM"i _ source:Identifier _ "WHERE"i _ condition:OrExpression _ {
+  = "SELECT"i _ selection:Selection _ "FROM"i _ source:Identifier _ "WHERE"i _ condition:OrExpression {
       return { type: "Query", selection, source, condition };
     }
 
 Selection
-  = "*" { return { type: "All" }; }
+  = _ "*" _ { return { type: "All" }; }
+
+Identifier
+  = $([a-zA-Z_][a-zA-Z0-9_]*)
 
 OrExpression
   = left:AndExpression _ rest:(_ "OR"i _ AndExpression)* {
       if (rest.length === 0) return left;
-      return makeLogicalChain(left, rest.map(r => ["OR", r[3]]));
+      return rest.reduce((acc, r) => ({ type: "OR", left: acc, right: r[3] }), left);
     }
 
 AndExpression
   = left:PrimaryExpression _ rest:(_ "AND"i _ PrimaryExpression)* {
       if (rest.length === 0) return left;
-      return makeLogicalChain(left, rest.map(r => ["AND", r[3]]));
+      return rest.reduce((acc, r) => ({ type: "AND", left: acc, right: r[3] }), left);
     }
 
 PrimaryExpression
-  = Parens
-  / InExpression
+  = "(" _ expr:OrExpression _ ")" { return expr; }
+  / StringInExpression
   / ComparisonExpression
 
-Parens
-  = "(" _ expr:OrExpression _ ")" { return expr; }
-
-InExpression
-  = str:StringLiteral _ "IN"i _ identifier:Identifier {
-      return { type: "InExpression", value: str, target: identifier };
+StringInExpression
+  = str:StringLiteral _ "IN"i _ id:Identifier {
+      return { type: "InExpression", value: str, target: id };
     }
 
 ComparisonExpression
-  = left:Identifier _ op:ComparisonOperator _ right:Integer {
+  = left:Identifier _ op:ComparisonOperator _ right:(Integer / StringLiteral) {
       return { type: "ComparisonExpression", left, operator: op, right };
     }
 
 ComparisonOperator
   = ">" / "<" / ">=" / "<=" / "=" / "!="
 
-Identifier
-  = $([a-zA-Z_][a-zA-Z0-9_]*)
-
 StringLiteral
-  = "'" chars:Char* "'" { return chars.join(''); }
-
-Char
-  = [^']
+  = "'" chars:([^']*) "'" { return chars.join(''); }
 
 Integer
   = digits:[0-9]+ { return parseInt(digits.join(""), 10); }
 
 _ "whitespace"
-  = [ \t\n\r]*
-
+  = [ \t\r\n]*

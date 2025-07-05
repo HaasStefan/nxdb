@@ -32,7 +32,8 @@ export class QueryParser {
 
   parseFromQuery(query: string) {
     try {
-      return parse(query);
+      const normalized = query.trim().replace(/\r\n/g, '\n').replace(/[‘’“”]/g, "'"); 
+      return parse(normalized);
     } catch (error: unknown) {
       throw new Error(`Failed to parse query: ${JSON.stringify(error)}`);
     }
