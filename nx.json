@@ -54,6 +54,12 @@
     },
     "test": {
       "dependsOn": ["^build"]
+    },
+    "build": {
+      "dependsOn": [
+        "peggy",
+        "^build"
+      ]
     }
   }
 }
