@@ -40,7 +40,7 @@ jobs:
         run: pnpm nx run-many --target=build --all --ci
 
       - name: Run tests
-        run: pnpm nx run-many --target=test --all --ci
+        run: pnpm nx run-many --target=test --all --ci --passWithNoTests
 
 
   build:
