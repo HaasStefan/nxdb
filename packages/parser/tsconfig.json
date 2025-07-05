@@ -2,6 +2,15 @@
   "extends": "../../tsconfig.base.json",
   "files": [],
   "include": [],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@parser": [
+        "src/lib/parser/parser.js",
+        "src/lib/parser/parser.d.ts"
+      ],
+    }
+  },
   "references": [
     {
       "path": "./tsconfig.lib.json"
