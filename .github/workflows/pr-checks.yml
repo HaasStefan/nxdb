@@ -34,13 +34,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run linting
-        run: pnpm nx run-many --target=lint --all
+        run: pnpm nx run-many --target=lint --all --ci
 
       - name: Run type checking
-        run: pnpm nx run-many --target=build --all
+        run: pnpm nx run-many --target=build --all --ci
 
       - name: Run tests
-        run: pnpm nx run-many --target=test --all --coverage
+        run: pnpm nx run-many --target=test --all --ci
 
 
   build:
@@ -67,7 +67,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build packages
-        run: pnpm nx run-many --target=build --all
+        run: pnpm nx run-many --target=build --all --ci
 
       - name: Test CLI functionality
         run: |
