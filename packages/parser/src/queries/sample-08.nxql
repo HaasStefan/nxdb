@@ -1,0 +1,12 @@
+-- Find projects which have high numberOfCommits
+SELECT p.name
+FROM (
+  SELECT * FROM projects AS project
+  WHERE project.name IN ['@nxdb/ui', '@nxdb/telemetry', '@nxdbauth']
+  AND linesOfCode > 500
+) AS p
+LET path = shortestPath('web', p.name)
+LET pathProjects = [SELECT * FROM projects WHERE name IN path]
+WHERE MAX(pathProjects[*].numberOfCommits) > 5
+ORDER BY p.numberOfCommits DESC
+LIMIT 10;

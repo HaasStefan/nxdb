@@ -1,0 +1,10 @@
+-- Find small, stable leaf nodes (great for extracting utility libs)
+SELECT
+  name
+FROM
+  projects
+WHERE
+  linesOfCode < 300
+  AND churnRate < 0.05
+  AND dependedByProjects.length = 0
+  AND participatesInCycle = false;

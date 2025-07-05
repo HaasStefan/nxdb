@@ -1,0 +1,6 @@
+-- Find projects that depend on deprecated or high-churn libraries
+SELECT p.name
+FROM projects AS p
+LET deps = [SELECT * FROM projects WHERE name IN p.dependencies]
+WHERE 
+  SOME d IN deps SATISFIES d.isDeprecated = true OR d.churnRate > 0.5;

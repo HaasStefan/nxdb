@@ -1,3 +1,6 @@
-SELECT * 
-FROM projects 
-WHERE tags CONTAINS 'type:library'
+SELECT
+  *
+FROM
+  projects
+WHERE
+  tags CONTAINS 'type:library'

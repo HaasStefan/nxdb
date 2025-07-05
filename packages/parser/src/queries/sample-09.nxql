@@ -1,0 +1,20 @@
+-- Find projects 
+SELECT p.name
+FROM projects AS p
+WHERE p.numberOfCommits < 5
+  AND len(p.dependencies) < 5
+  AND NOT EXISTS (
+    -- Find any dependency path from p to a leaf violating the conditions
+    SELECT 1
+    FROM UNNEST(p.dependencies) AS dep
+    LET paths = allPaths(p.name, dep)
+    WHERE EXISTS (
+      SELECT 1 FROM UNNEST(paths) AS path
+      WHERE len(path) > 5                         -- path too long
+         OR EXISTS (
+           SELECT 1 FROM UNNEST(path) AS projOnPath
+           WHERE (SELECT TOP 1 numberOfCommits FROM projects WHERE name = projOnPath) > p.numberOfCommits
+         )
+    )
+  )
+LIMIT 20;

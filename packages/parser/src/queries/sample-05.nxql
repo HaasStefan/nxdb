@@ -1,0 +1,8 @@
+-- Find high-churn shared libs that are widely depended on (risk factor)
+SELECT
+  name
+FROM
+  projects
+WHERE
+  churnRate > 0.3
+  AND dependedByProjects.length >= 5;

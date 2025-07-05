@@ -1,0 +1,12 @@
+-- Find deepest leaf projects
+SELECT
+  name,
+  distanceTo ('web', name) AS distanceToWeb
+FROM
+  projects
+WHERE
+  dependedByProjects.length = 0
+ORDER BY
+  distanceToWeb DESC
+LIMIT
+  10;

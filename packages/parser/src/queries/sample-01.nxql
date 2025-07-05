@@ -1,3 +1,6 @@
-SELECT * 
-FROM projects 
-WHERE name = '@nxdb/cli'
+SELECT
+  *
+FROM
+  projects
+WHERE
+  name = '@nxdb/cli'
