@@ -49,7 +49,7 @@ export default async function (projectRoot) {
 `;
 
 const projectConfig = `
-import baseFnAsync form '<%=relativeBaseConfigPath%>';
+import baseFnAsync from '<%=relativeBaseConfigPath%>';
 import { resolve } from 'node:path';
 
 export default async function () {

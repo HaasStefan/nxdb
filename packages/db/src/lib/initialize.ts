@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, write, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { buildDatabaseAsync, generateNxProjectGraphAsync } from './builder.js';
 import chalk from 'chalk';
@@ -42,37 +42,61 @@ async function generateConfigFilesAsync(): Promise<void> {
     (node) => node.data.root
   );
 
-  generateBaseConfig();
+  const wasBaseConfigGenerated = generateBaseConfig();
 
-  console.log(
-    `${chalk.green('✔')} Generated .nxdb.config.base.mjs in workspace root.`
-  );
-
-  for (const projectRoot of projectRoots) {
-    generateProjectConfig(projectRoot);
+  if (wasBaseConfigGenerated) {
+    console.log(
+      `${chalk.green('✔')} Generated .nxdb.config.base.mjs in workspace root.`
+    );
   }
 
-  console.log(
-    `${chalk.green('✔')} Generated .nxdb.config.mjs for each project.`
-  );
+  let wasAtLeastOneProjectConfigGenerated = false;
+  for (const projectRoot of projectRoots) {
+    const wasProjectConfigGenerated = generateProjectConfig(projectRoot);
+    wasAtLeastOneProjectConfigGenerated = wasAtLeastOneProjectConfigGenerated || wasProjectConfigGenerated;
+  }
+
+  if (wasAtLeastOneProjectConfigGenerated) {
+    console.log(
+      `${chalk.green('✔')} Generated .nxdb.config.mjs for projects.`
+    );
+  }
 }
 
 function generateProjectConfig(projectRoot: string) {
+  if (existsSync(resolve(projectRoot, '.nxdb.config.mjs'))) {
+    console.warn(
+      `${chalk.yellow(
+        `⚠️ .nxdb.config.mjs already exists in ${projectRoot}, skipping generation.`
+      )}`
+    );
+    return false;
+  }
+
   const baseConfigPath = resolve('.nxdb.config.base.mjs');
   const relativeConfigPath = relative(projectRoot, baseConfigPath);
   const templateEngine = TemplateEngine.getInstance();
   const template = templateEngine.getFile('.nxdb.config.mjs', {
-    relativeBaseConfigPath: relativeConfigPath
+    relativeBaseConfigPath: relativeConfigPath,
   });
-  writeFileSync(
-    resolve(projectRoot, '.nxdb.config.mjs'),
-    template,
-    'utf-8'
-  );
+  writeFileSync(resolve(projectRoot, '.nxdb.config.mjs'), template, 'utf-8');
+
+  return true;
 }
 
 function generateBaseConfig() {
+  if (existsSync(resolve('.nxdb.config.base.mjs'))) {
+    console.warn(
+      `${chalk.yellow(
+        '⚠️ .nxdb.config.base.mjs already exists, skipping generation.'
+      )}`
+    );
+    return false;
+  }
+
   const templateEngine = TemplateEngine.getInstance();
   const template = templateEngine.getFile('.nxdb.config.base.mjs', {});
   writeFileSync(resolve('.nxdb.config.base.mjs'), template, 'utf-8');
+
+  return true;
 }
