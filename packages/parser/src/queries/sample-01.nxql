@@ -1,0 +1,3 @@
+SELECT * 
+FROM projects 
+WHERE name = '@nxdb/cli'
