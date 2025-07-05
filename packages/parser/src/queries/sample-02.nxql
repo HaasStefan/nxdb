@@ -1,0 +1,3 @@
+SELECT * 
+FROM projects 
+WHERE tags CONTAINS 'type:library'

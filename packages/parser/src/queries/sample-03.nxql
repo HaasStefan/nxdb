@@ -1,0 +1,5 @@
+SELECT * 
+FROM projects 
+WHERE tags CONTAINS 'type:library'
+OR tags CONTAINS 'type:app'
+AND numberOfCommits > 5
