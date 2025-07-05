@@ -3,6 +3,6 @@ SELECT
 FROM
   projects
 WHERE
-  tags CONTAINS 'type:library'
-  OR tags CONTAINS 'type:app'
+  'type:library' IN tags
+  OR 'type:app' IN tags
   AND numberOfCommits > 5
