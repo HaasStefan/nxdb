@@ -7,7 +7,12 @@
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": false,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@parser": [
+        "src/lib/parser/parser.js",
+      ],
+    }
   },
   "include": ["src/**/*.ts"],
   "references": [],

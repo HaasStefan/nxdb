@@ -5,7 +5,8 @@
   "type": "module",
   "dependencies": {
     "commander": "catalog:",
-    "@nxdb/db": "workspace:*"
+    "@nxdb/db": "workspace:*",
+    "@nxdb/parser": "workspace:*"
   },
   "nx": {
     "targets": {

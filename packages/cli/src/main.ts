@@ -6,6 +6,8 @@ import {
   readSchema,
   resetDatabaseAsync,
 } from '@nxdb/db';
+import { QueryParser } from '@nxdb/parser';
+import { writeFileSync } from 'node:fs';
 
 program
   .name('nxdb')
@@ -23,6 +25,20 @@ program
   .description('Resets the NxDB database')
   .action(async () => {
     await resetDatabaseAsync();
+  });
+
+program
+  .command('query <queryFile>')
+  .description('Runs a query against the NxDB database')
+  .action(async (queryFile) => {
+    const queryParser = QueryParser.getInstance();
+    try {
+      const query = queryParser.parseQueryFromFile(queryFile);
+      writeFileSync('query.json', JSON.stringify(query, null, 2));
+      console.log('Query saved to query.json');
+    } catch (error) {
+      console.error('Error parsing query:', error);
+    }
   });
 
 program
