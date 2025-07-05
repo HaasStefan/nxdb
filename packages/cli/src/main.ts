@@ -34,8 +34,8 @@ program
     const queryParser = QueryParser.getInstance();
     try {
       const query = queryParser.parseQueryFromFile(queryFile);
-      writeFileSync('query.json', JSON.stringify(query, null, 2));
-      console.log('Query saved to query.json');
+      writeFileSync('tmp/query.json', JSON.stringify(query, null, 2));
+      console.log('Query saved to tmp/query.json');
     } catch (error) {
       console.error('Error parsing query:', error);
     }
