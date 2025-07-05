@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { parse } from '@parser';
+import { parse } from './parser/parser.js';
 
 export class QueryParser {
   private static instance: QueryParser | null = null;
@@ -21,8 +21,8 @@ export class QueryParser {
       throw new Error(`File not found: ${filePath}`);
     }
 
-    if (!filePath.endsWith('.peggy')) {
-      throw new Error(`Invalid file type: ${filePath}. Expected a .peggy file.`);
+    if (!filePath.endsWith('.nxql')) {
+      throw new Error(`Invalid file type: ${filePath}. Expected a .nxql file.`);
     }
 
     const fileContent = readFileSync(filePath, 'utf-8');

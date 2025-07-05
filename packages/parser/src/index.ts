@@ -1,1 +1,1 @@
-export { QueryParser } from './lib/quer-parser.js';
+export { QueryParser } from './lib/query-parser.js';
