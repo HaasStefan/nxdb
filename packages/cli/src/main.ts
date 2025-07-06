@@ -6,7 +6,11 @@ import {
   readSchema,
   resetDatabaseAsync,
 } from '@nxdb/db';
-import { printQueryResultAsTable, QueryParser, runQuery } from '@nxdb/parser';
+import {
+  printQueryResultAsTable,
+  QueryParser,
+  runQueryAsync,
+} from '@nxdb/parser';
 import { writeFileSync } from 'node:fs';
 import chalk from 'chalk';
 import prompts from 'prompts';
@@ -48,7 +52,7 @@ program
     const queryParser = QueryParser.getInstance();
     try {
       const query = queryParser.parseQueryFromFile(queryFile);
-      const results = runQuery(query);
+      const results = await runQueryAsync(query);
 
       if (outputFile) {
         writeFileSync(outputFile, JSON.stringify(results, null, 2));
@@ -71,23 +75,32 @@ program
 
 program.description('Runs an interactive query session').action(async () => {
   while (true) {
-    const response = await prompts({
-      type: 'text',
-      name: 'query',
-      message: 'Query:',
-      validate: (value) => {
-        if (value.trim() === '') {
-          return 'Query cannot be empty';
-        }
-        return true;
+    const response = await prompts(
+      {
+        type: 'text',
+        name: 'query',
+        message: 'Query:',
+        validate: (value) => {
+          if (value.trim() === '') {
+            return 'Query cannot be empty';
+          }
+          return true;
+        },
+      },
+      {
+        onCancel: () => {
+          console.log(chalk.green('Exiting interactive mode.'));
+          process.exit(0);
+        },
       }
-    }, { onCancel: () => {
-      console.log(chalk.green('Exiting interactive mode.'));
-      process.exit(0);
-    }});
+    );
 
     const queryFromPrompt = response.query.trim();
-    if (queryFromPrompt.toLowerCase() === 'exit' || queryFromPrompt.toLowerCase() === 'stop' || queryFromPrompt.toLowerCase() === 'quit') {
+    if (
+      queryFromPrompt.toLowerCase() === 'exit' ||
+      queryFromPrompt.toLowerCase() === 'stop' ||
+      queryFromPrompt.toLowerCase() === 'quit'
+    ) {
       console.log(chalk.green('Exiting interactive mode.'));
       process.exit(0);
     }
@@ -95,12 +108,16 @@ program.description('Runs an interactive query session').action(async () => {
     try {
       const queryParser = QueryParser.getInstance();
       const query = queryParser.parseFromQuery(queryFromPrompt);
-      const results = runQuery(query);
+      const results = await runQueryAsync(query);
 
       if (results.total === 0) {
         console.log(chalk.yellow('No results found.'));
       } else {
-        printQueryResultAsTable(results, parseInt(process.env.MAX_COLUMNS || '6', 10), parseInt(process.env.MAX_ROWS || '20', 10));
+        printQueryResultAsTable(
+          results,
+          parseInt(process.env.MAX_COLUMNS || '6', 10),
+          parseInt(process.env.MAX_ROWS || '20', 10)
+        );
       }
     } catch {
       console.error(chalk.red('Error running query!'));

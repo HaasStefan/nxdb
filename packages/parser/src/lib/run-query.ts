@@ -1,5 +1,5 @@
 import type { ComparisonExpression, Query } from './parser/parser.js';
-import { readDatabase, type ProjectsMap } from '@nxdb/db';
+import { readDatabaseAsync, type ProjectsMap } from '@nxdb/db';
 import type { QueryResult, Result } from './query-result.js';
 import { normalizeProject, omitBySelection } from './normalize-project.js';
 import { normalizeSelection } from './normalize-selection.js';
@@ -11,9 +11,9 @@ import { normalizeSelection } from './normalize-selection.js';
  * @returns An array of query results.
  * @throws Will throw an error if the source is not 'projects' or if the selection type is not supported.
  */
-export function runQuery(query: Query): QueryResult {
+export async function runQueryAsync(query: Query): Promise<QueryResult> {
   const { selection, source, condition } = query;
-  const { projects } = readDatabase();
+  const { projects } = await readDatabaseAsync();
   const results: Result[] = [];
 
   if (source !== 'projects') {

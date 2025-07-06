@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { Primitive } from './utils/get-custom-fields.js';
 import { ProjectsMap } from './project.js';
 import chalk from 'chalk';
+import { buildDatabaseAsync } from './builder.js';
 
 export type CustomFieldsPerProject = Record<string, Record<string, Primitive>>;
 
@@ -20,10 +21,20 @@ export function writeDatabase(projectMap: ProjectsMap) {
   console.log(`${chalk.green('✔')} Database has beeen successfully persisted.`);
 }
 
-export function readDatabase(): { projects: ProjectsMap } {
-  const dbDirPath = resolve('.nxdb');
-  const projectsFilePath = resolve(dbDirPath, 'projects.json');
+export async function readDatabaseAsync(): Promise<{ projects: ProjectsMap }> {
+  let dbDirPath = resolve('.nxdb');
+  if (!existsSync(dbDirPath)) {
+    await buildDatabaseAsync();
+  }
 
+  dbDirPath = resolve('.nxdb');
+
+  let projectsFilePath = resolve(dbDirPath, 'projects.json');
+  if (!existsSync(projectsFilePath)) {
+    await buildDatabaseAsync();
+  }
+
+  projectsFilePath = resolve(dbDirPath, 'projects.json');
   if (!existsSync(projectsFilePath)) {
     throw new Error(`Database file not found at ${projectsFilePath}`);
   }
