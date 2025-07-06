@@ -12,6 +12,8 @@ export function printQueryResultAsTable(
       ? Object.keys(results[0] || {})
       : selection;
 
+  console.log();
+
   if (results.length === 0) {
     console.log(chalk.yellow('No results found.'));
   }
@@ -50,7 +52,7 @@ export function printQueryResultAsTable(
       })
   );
 
-  console.log(`Total results: ${chalk.green(total)}`);
+  console.log(`Total results: ${chalk.green(total)}\n`);
 }
 
 function capString(str: string, maxLength: number): string {

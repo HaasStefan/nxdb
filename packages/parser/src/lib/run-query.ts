@@ -3,6 +3,7 @@ import { readDatabaseAsync, type ProjectsMap } from '@nxdb/db';
 import type { QueryResult, Result } from './query-result.js';
 import { normalizeProject, omitBySelection } from './normalize-project.js';
 import { normalizeSelection } from './normalize-selection.js';
+import ora from 'ora';
 
 /**
  * Runs a query against the database and returns the results.
@@ -28,6 +29,8 @@ export async function runQueryAsync(query: Query): Promise<QueryResult> {
     );
   }
 
+  const spinner = ora(`Running query...`).start();
+
   const normalizedSelection = normalizeSelection(selection);
 
   if (condition) {
@@ -36,10 +39,12 @@ export async function runQueryAsync(query: Query): Promise<QueryResult> {
       condition.operator === '=' &&
       condition.left === 'name';
     if (shouldAccessByKey) {
-      const results = handleNameEqualComparisonExpression(projects, condition).map(
-        (project) => omitBySelection(project, normalizedSelection)
-      );
+      const results = handleNameEqualComparisonExpression(
+        projects,
+        condition
+      ).map((project) => omitBySelection(project, normalizedSelection));
 
+      spinner.succeed('Query executed successfully.');
       return {
         results,
         total: results.length,
@@ -51,6 +56,8 @@ export async function runQueryAsync(query: Query): Promise<QueryResult> {
   const normalizedResults = results.map((result) =>
     omitBySelection(result, normalizedSelection)
   );
+
+  spinner.succeed('Query executed successfully.');
   return {
     results: normalizedResults,
     total: normalizedResults.length,
