@@ -48,9 +48,9 @@ First, you need to initialize NxDB once with the following command:
 nxdb init
 ```
 
-This will add the `.nxdb` directory to your `.gitignore` file and generate all the required nxdb config files and schema file.
+This will add the `.nxdb` directory to your `.gitignore` file and generate all the required nxdb config files and schema file. It will also trigger a nxdb build, such that the database is constructed locally.
 
-Then, you cna already run your first query, by running the following command:
+Then, you can already run your first query, by running the following command:
 
 ```plaintext
 nxdb query <queryFile>
@@ -65,6 +65,8 @@ nxdb
 ```
 
 This will enter interactive mode, where you can write queries in the terminal and get the results there, until you end the session.
+
+> Note, there are no automatic DB updates when the project graph changes, as building the DB with custom fields could be quite expensive depending on the size of the repo. Therefore, you have to manually update the database, whenever you want to query the database. For this, run `nxdb build`. This might seem weird, coming from a traditional database, but NxDB is thrown away completely and replaced with new data.
 
 # Queries
 
