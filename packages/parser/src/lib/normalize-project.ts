@@ -1,8 +1,8 @@
 import type { Project } from '@nxdb/db';
-import type { QueryResult } from './query-result.js';
+import type { Result } from './query-result.js';
 
-export function normalizeProject(project: Project): QueryResult {
-  const normalized: QueryResult = {
+export function normalizeProject(project: Project): Result {
+  const normalized: Result = {
     name: project.name,
     type: project.type,
     tags: project.tags,
@@ -23,14 +23,14 @@ export function normalizeProject(project: Project): QueryResult {
 }
 
 export function omitBySelection(
-  project: QueryResult,
+  project: Result,
   selection: string[]
-): Partial<QueryResult> {
+): Partial<Result> {
   if (selection.length === 1 && selection[0] === '*') {
     return project;
   }
 
-  const result: Partial<QueryResult> = {};
+  const result: Partial<Result> = {};
   selection.forEach((key) => {
     if (key in selection) {
       result[key] = project[key];

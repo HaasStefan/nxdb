@@ -6,7 +6,7 @@ import {
   readSchema,
   resetDatabaseAsync,
 } from '@nxdb/db';
-import { QueryParser, runQuery } from '@nxdb/parser';
+import { printQueryResultAsTable, QueryParser, runQuery } from '@nxdb/parser';
 import { writeFileSync } from 'node:fs';
 import chalk from 'chalk';
 
@@ -32,16 +32,15 @@ program
 program
   .command('query <queryFile>')
   .option('-o, --outputFile <file>', 'File to write the query result to')
+  .option('-c, --maxColumns <number>', 'Maximum number of columns in the output table', '6')
+  .option('-r, --maxRows <number>', 'Maximum number of rows in the output table', '100')
   .description('Runs a query against the NxDB database')
   .action(async (queryFile, options) => {
-    const { outputFile } = options;
+    const { outputFile, maxColumns, maxRows } = options;
     const queryParser = QueryParser.getInstance();
     try {
       const query = queryParser.parseQueryFromFile(queryFile);
       const results = runQuery(query);
-      // todo run the query against the database
-      // const result = await runQueryAsync(query);
-      // For now, just log the query to the console
 
       if (outputFile) {
         writeFileSync(outputFile, JSON.stringify(results, null, 2));
@@ -49,8 +48,7 @@ program
           `${chalk.green('✔')} Query result written to ${outputFile}.`
         );
       } else {
-        console.log(chalk.blue('Query result:'));
-        console.log(JSON.stringify(results, null, 2));
+        printQueryResultAsTable(results, parseInt(maxColumns, 10), parseInt(maxRows, 10)); 
       }
     } catch (error) {
       console.error(chalk.red(`Error parsing query from file: ${queryFile}`));

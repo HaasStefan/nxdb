@@ -1,6 +1,6 @@
 import type { ComparisonExpression, Query } from './parser/parser.js';
 import { readDatabase, type ProjectsMap } from '@nxdb/db';
-import type { QueryResult } from './query-result.js';
+import type { QueryResult, Result } from './query-result.js';
 import { normalizeProject, omitBySelection } from './normalize-project.js';
 import { normalizeSelection } from './normalize-selection.js';
 
@@ -11,10 +11,10 @@ import { normalizeSelection } from './normalize-selection.js';
  * @returns An array of query results.
  * @throws Will throw an error if the source is not 'projects' or if the selection type is not supported.
  */
-export function runQuery(query: Query) {
+export function runQuery(query: Query): QueryResult {
   const { selection, source, condition } = query;
   const { projects } = readDatabase();
-  const queryResults: QueryResult[] = [];
+  const results: Result[] = [];
 
   if (source !== 'projects') {
     throw new Error(
@@ -36,15 +36,26 @@ export function runQuery(query: Query) {
       condition.operator === '=' &&
       condition.left === 'name';
     if (shouldAccessByKey) {
-      return handleNameEqualComparisonExpression(projects, condition).map(
+      const results = handleNameEqualComparisonExpression(projects, condition).map(
         (project) => omitBySelection(project, normalizedSelection)
       );
+
+      return {
+        results,
+        total: results.length,
+        selection: normalizedSelection,
+      };
     }
   }
 
-  return queryResults.map((result) =>
+  const normalizedResults = results.map((result) =>
     omitBySelection(result, normalizedSelection)
   );
+  return {
+    results: normalizedResults,
+    total: normalizedResults.length,
+    selection: normalizedSelection,
+  };
 }
 
 /**
@@ -60,7 +71,7 @@ function handleNameEqualComparisonExpression(
   projects: ProjectsMap,
   comparisonExpression: ComparisonExpression
 ) {
-  const queryResults: QueryResult[] = [];
+  const results: Result[] = [];
   const projectName = comparisonExpression.right;
   if (typeof projectName !== 'string') {
     throw new Error(
@@ -71,8 +82,8 @@ function handleNameEqualComparisonExpression(
   if (projectName in projects) {
     const project = projects[projectName];
     const queryResult = normalizeProject(project);
-    queryResults.push(queryResult);
+    results.push(queryResult);
   }
 
-  return queryResults;
+  return results;
 }

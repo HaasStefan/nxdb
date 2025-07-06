@@ -1,3 +1,9 @@
-import type { Primitive } from "@nxdb/db";
+import type { Primitive } from '@nxdb/db';
 
-export type QueryResult = Record<string, Primitive>;
+export type Result = Record<string, Primitive>;
+
+export interface QueryResult {
+  results: Partial<Result>[];
+  total: number;
+  selection: string[]; 
+}
