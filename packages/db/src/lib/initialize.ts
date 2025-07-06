@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, write, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { buildDatabaseAsync, generateNxProjectGraphAsync } from './builder.js';
 import chalk from 'chalk';
