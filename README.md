@@ -2,7 +2,7 @@
   <img src="https://github.com/user-attachments/assets/07b4317c-2c27-4b1e-888a-44b416bb1293" alt="ng-di-analyzer logo" width="250" height="250" />
 </p>
 
-<h1 align="center">Nx DB</h1>
+<h1 align="center">NxDB</h1>
 
 <p align="center">
   🌊 Query your Nx Project Graph with SQL
