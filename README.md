@@ -9,8 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-work%20in%20progress-orange?style=for-the-ba![Uploading Design_ohne_Titel__21_-removebg-preview.png…]()
-dge" alt="Work in Progress Badge" />
+<img src="https://img.shields.io/badge/status-work%20in%20progress-orange?style=for-the-badge" alt="Work in Progress Badge" />
 </p>
 
 # Introduction
