@@ -64,6 +64,9 @@ If you want to run queries interactively, just run:
 nxdb
 ```
 
+![image](https://github.com/user-attachments/assets/74c06996-d23e-4c85-acd0-39ff0a9d14f6)
+
+
 This will enter interactive mode, where you can write queries in the terminal and get the results there, until you end the session.
 
 > Note, there are no automatic DB updates when the project graph changes, as building the DB with custom fields could be quite expensive depending on the size of the repo. Therefore, you have to manually update the database, whenever you want to query the database. For this, run `nxdb build`. This might seem weird, coming from a traditional database, but NxDB is thrown away completely and replaced with new data.
