@@ -61,7 +61,6 @@ program
 // todo: add interactive mode which allows users to run queries without needing to write them in a file
 // command should not be unnamed
 program
-  .command('')
   .description('Runs an interactive query session')
   .action(() => {
     // todo: implement interactive mode
