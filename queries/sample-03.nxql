@@ -1,1 +1,1 @@
-SELECT * FROM projects WHERE hello = 'world'
+SELECT * FROM projects WHERE 'build' IN targets

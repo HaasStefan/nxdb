@@ -28,7 +28,7 @@ const reservedFieldNames = [
   'root',
   'customFields',
   'tags',
-  'targetNames',
+  'targets',
   'dependencies',
   'dependedByProjects',
 ] as const;

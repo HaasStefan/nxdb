@@ -43,7 +43,7 @@ async function getProjectsMapAsync(
         )
         .map((key) => key);
 
-      const targetNames = Object.keys(
+      const targets = Object.keys(
         projectGraph.nodes[projectName]?.data?.targets || {}
       );
 
@@ -54,7 +54,7 @@ async function getProjectsMapAsync(
         root: projectRoot,
         customFields,
         tags,
-        targetNames,
+        targets,
         dependencies,
         dependedByProjects,
       };

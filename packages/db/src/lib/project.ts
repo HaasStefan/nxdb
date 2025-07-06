@@ -5,7 +5,7 @@ export interface Project {
   root: string;
   customFields: Record<string, Primitive>;
   tags: string[];
-  targetNames: string[];
+  targets: string[];
   dependencies: string[];
   dependedByProjects: string[];
 }
