@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/e8202175-79f5-4613-97ea-27daa91d61d0" alt="ng-di-analyzer logo" width="250" height="250" />
+  <img src="https://github.com/user-attachments/assets/8decd2f8-4eba-4308-a47f-6cdf91438879" alt="ng-di-analyzer logo" width="250" height="250" />
 </p>
 
 <h1 align="center">NxDB</h1>
@@ -9,7 +9,8 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-work%20in%20progress-orange?style=for-the-badge" alt="Work in Progress Badge" />
+  <img src="https://img.shields.io/badge/status-work%20in%20progress-orange?style=for-the-ba![Uploading Design_ohne_Titel__21_-removebg-preview.png…]()
+dge" alt="Work in Progress Badge" />
 </p>
 
 # Introduction
