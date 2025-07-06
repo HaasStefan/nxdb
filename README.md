@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/07b4317c-2c27-4b1e-888a-44b416bb1293" alt="ng-di-analyzer logo" width="250" height="250" />
+  <img src="https://github.com/user-attachments/assets/e8202175-79f5-4613-97ea-27daa91d61d0" alt="ng-di-analyzer logo" width="250" height="250" />
 </p>
 
 <h1 align="center">NxDB</h1>
