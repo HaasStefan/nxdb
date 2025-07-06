@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, write, writeFileSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { buildDatabaseAsync, generateNxProjectGraphAsync } from './builder.js';
 import chalk from 'chalk';
@@ -28,12 +28,45 @@ export async function initializeDatabaseAsync(): Promise<void> {
     }
   }
 
+  generateSchemaFile();
+
   await generateConfigFilesAsync();
 
   // skip graph computation because generateConfigFilesAsync already does it
   await buildDatabaseAsync({ skipGraphComputation: true });
 
   console.log(`${chalk.green('✔')} NxDB has been successfully initialized!`);
+}
+
+function generateSchemaFile() {
+  const schemaFilePath = resolve('.nxdb.schema.json');
+  if (existsSync(schemaFilePath)) {
+    console.warn(
+      `${chalk.yellow(
+        '⚠️ .nxdb.schema.json already exists, skipping generation.'
+      )}`
+    );
+  }
+
+  writeFileSync(
+    schemaFilePath,
+    JSON.stringify(
+      {
+        someField: {
+          type: 'string',
+          description: 'Some field description',
+          default: 'Hello World',
+        },
+      },
+      null,
+      2
+    ),
+    'utf-8'
+  );
+
+  console.log(
+    `${chalk.green('✔')} Generated .nxdb.schema.json in workspace root.`
+  );
 }
 
 async function generateConfigFilesAsync(): Promise<void> {
@@ -53,13 +86,12 @@ async function generateConfigFilesAsync(): Promise<void> {
   let wasAtLeastOneProjectConfigGenerated = false;
   for (const projectRoot of projectRoots) {
     const wasProjectConfigGenerated = generateProjectConfig(projectRoot);
-    wasAtLeastOneProjectConfigGenerated = wasAtLeastOneProjectConfigGenerated || wasProjectConfigGenerated;
+    wasAtLeastOneProjectConfigGenerated =
+      wasAtLeastOneProjectConfigGenerated || wasProjectConfigGenerated;
   }
 
   if (wasAtLeastOneProjectConfigGenerated) {
-    console.log(
-      `${chalk.green('✔')} Generated .nxdb.config.mjs for projects.`
-    );
+    console.log(`${chalk.green('✔')} Generated .nxdb.config.mjs for projects.`);
   }
 }
 
