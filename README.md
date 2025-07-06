@@ -122,3 +122,8 @@ WHERE p.numberOfCommits < 5
   )
 LIMIT 20;
 ```
+
+Other feature items:
+- [ ] Extensive docs page
+- [ ] Querying Task Graph
+- [ ] UI with tables and query editor
