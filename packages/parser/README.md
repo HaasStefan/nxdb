@@ -1,11 +1,5 @@
-# parser
+# Peggy
 
-This library was generated with [Nx](https://nx.dev).
+For creating the parser, I am using peggy, which is a grammar for parser, which is parsed and peggy created an imperative parser in JS. 
 
-## Building
-
-Run `nx build parser` to build the library.
-
-## Running unit tests
-
-Run `nx test parser` to execute the unit tests via [Jest](https://jestjs.io).
+Here is an online playground to play with the grammar: https://peggyjs.org/online.html
