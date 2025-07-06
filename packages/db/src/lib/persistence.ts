@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { Primitive } from './utils/get-custom-fields.js';
 import { ProjectsMap } from './project.js';
@@ -18,4 +18,18 @@ export function writeDatabase(projectMap: ProjectsMap) {
   );
 
   console.log(`${chalk.green('✔')} Database has beeen successfully persisted.`);
+}
+
+export function readDatabase(): { projects: ProjectsMap } {
+  const dbDirPath = resolve('.nxdb');
+  const projectsFilePath = resolve(dbDirPath, 'projects.json');
+
+  if (!existsSync(projectsFilePath)) {
+    throw new Error(`Database file not found at ${projectsFilePath}`);
+  }
+
+  const projectsData = readFileSync(projectsFilePath, 'utf-8');
+  return {
+    projects: JSON.parse(projectsData) as ProjectsMap,
+  };
 }

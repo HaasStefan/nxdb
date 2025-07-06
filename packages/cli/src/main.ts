@@ -6,7 +6,7 @@ import {
   readSchema,
   resetDatabaseAsync,
 } from '@nxdb/db';
-import { QueryParser } from '@nxdb/parser';
+import { QueryParser, runQuery } from '@nxdb/parser';
 import { writeFileSync } from 'node:fs';
 import chalk from 'chalk';
 
@@ -38,18 +38,19 @@ program
     const queryParser = QueryParser.getInstance();
     try {
       const query = queryParser.parseQueryFromFile(queryFile);
+      const results = runQuery(query);
       // todo run the query against the database
       // const result = await runQueryAsync(query);
       // For now, just log the query to the console
 
       if (outputFile) {
-        writeFileSync(outputFile, JSON.stringify(query, null, 2));
+        writeFileSync(outputFile, JSON.stringify(results, null, 2));
         console.log(
           `${chalk.green('✔')} Query result written to ${outputFile}.`
         );
       } else {
         console.log(chalk.blue('Query result:'));
-        console.log(JSON.stringify(query, null, 2));
+        console.log(JSON.stringify(results, null, 2));
       }
     } catch (error) {
       console.error(chalk.red(`Error parsing query from file: ${queryFile}`));

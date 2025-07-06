@@ -19,21 +19,17 @@
     "targets": {
       "peggy": {
         "executor": "nx:run-commands",
+        "cache": false,
         "options": {
           "command": "peggy --format es --output src/lib/parser/parser.js src/lib/parser/parser.pegjs",
           "cwd": "packages/parser"
-        },
-        "inputs": [
-          "^packages/parser/src/parser/parser.pegjs"
-        ],
-        "outputs": [
-          "{projectRoot}/src/parser/parser.js"
-        ]
+        }
       }
     }
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "@nxdb/db": "workspace:*"
   },
   "devDependencies": {
     "peggy": "catalog:"

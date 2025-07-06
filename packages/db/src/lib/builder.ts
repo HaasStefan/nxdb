@@ -48,14 +48,22 @@ async function getProjectsMapAsync(
       );
 
       const tags = projectGraph.nodes[projectName]?.data?.tags || [];
+      const type =
+        projectGraph.nodes[projectName]?.data?.projectType || 'undefined';
+      const implicitDependencies =
+        projectGraph.nodes[projectName]?.data?.implicitDependencies || [];
+      const sourceRoot = projectGraph.nodes[projectName]?.data?.sourceRoot;
 
       const project: Project = {
         name: projectName,
         root: projectRoot,
+        sourceRoot,
         customFields,
         tags,
+        type,
         targets,
         dependencies,
+        implicitDependencies,
         dependedByProjects,
       };
 

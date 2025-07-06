@@ -4,27 +4,27 @@ export declare module './parser.js' {
 
 export interface Query {
   type: 'Query';
-  selection: {
-    type: SelectionType;
-  };
+  selection: Selection;
   source: SourceType;
   condition?: Expression;
+}
+
+export interface Selection {
+  type: SelectionType;
 }
 
 export type SelectionType = 'All' | string;
 
 export type SourceType = 'projects' | string;
 
-export type ExpressionType =
-  | 'ComparisonExpression'
-  | 'InExpression'
+export type ExpressionType = 'ComparisonExpression' | 'InExpression';
 
 export interface ComparisonExpression {
   type: 'ComparisonExpression';
   left: string;
   operator: '=' | '!=' | '<' | '>' | '<=' | '>=';
   right: string | number | boolean;
-};
+}
 
 export interface InExpression {
   type: 'InExpression';

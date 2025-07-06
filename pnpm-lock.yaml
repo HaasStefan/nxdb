@@ -183,6 +183,9 @@ importers:
 
   packages/parser:
     dependencies:
+      '@nxdb/db':
+        specifier: workspace:*
+        version: link:../db
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
