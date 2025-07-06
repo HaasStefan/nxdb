@@ -1,5 +1,9 @@
 # NxQL
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a75f0e63-5dc6-4c63-8ba9-b1d70854b311" alt="logo" width="250" height="250" />
+</p>
+
 ## Peggy
 
 For creating the parser, I am using peggy, which is a grammar for parser, which is parsed and peggy created an imperative parser in JS. 
