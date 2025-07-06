@@ -40,31 +40,57 @@ nx-workspace/
 npm install -D nxdb
 ```
 
+# Getting Started
+
+First, you need to initialize NxDB once with the following command:
+
+```plaintext
+nxdb init
+```
+
+This will add the `.nxdb` directory to your `.gitignore` file and generate all the required nxdb config files and schema file.
+
+Then, you cna already run your first query, by running the following command:
+
+```plaintext
+nxdb query <queryFile>
+```
+
+queryFile... This is the path to an NxQL file which should have the file extension `.nxql`.
+
+If you want to run queries interactively, just run:
+
+```plaintext
+nxdb
+```
+
+This will enter interactive mode, where you can write queries in the terminal and get the results there, until you end the session.
+
 # Queries
 
 Currently, in the MVP, only some very simple queries are supported. 
 
-## Samples
+## Examples
 
-### Sample 1
+### Example 1
 
 ```sql
 SELECT * FROM projects WHERE name = '@nxdb/cli'
 ```
 
-### Sample 2
+### Example 2
 
 ```sql
 SELECT name, root, tags FROM projects
 ```
 
-### Sample 3
+### Example 3
 
 ```sql
 SELECT * FROM projects WHERE 'type:library' IN tags
 ```
 
-### Sample 4
+### Example 4
 
 ```sql
 SELECT * FROM projects WHERE 'build' IN targets
