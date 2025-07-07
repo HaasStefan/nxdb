@@ -1,7 +1,25 @@
 {
   "name": "@nx-db/db",
   "version": "0.0.1",
-  "private": true,
+  "description": "NxDB - a database for NxQL",
+  "keywords": [
+    "nxdb",
+    "nx",
+    "nxql",
+    "database"
+  ],
+  "author": "Stefan Haas <stefan.haas.privat@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaasStefan/nxdb.git",
+    "directory": "packages/db"
+  },
+  "bugs": {
+    "url": "https://github.com/HaasStefan/nxdb/issues"
+  },
+  "homepage": "https://github.com/HaasStefan/nxdb#readme",
+  "private": false,
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

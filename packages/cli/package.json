@@ -1,7 +1,26 @@
 {
   "name": "@nx-db/cli",
   "version": "0.0.1",
-  "private": true,
+  "description": "Command line interface for NxDB",
+  "keywords": [
+    "nxdb",
+    "cli",
+    "nx",
+    "nxql",
+    "database"
+  ],
+  "author": "Stefan Haas <stefan.haas.privat@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaasStefan/nxdb.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/HaasStefan/nxdb/issues"
+  },
+  "homepage": "https://github.com/HaasStefan/nxdb#readme",
+  "private": false,
   "type": "module",
   "bin": {
     "nxdb": "./dist/main.js"

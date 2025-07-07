@@ -17,6 +17,9 @@
   "tui": {
     "enabled": false
   },
+  "release": {
+    "projects": ["*"]
+  },
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
@@ -56,10 +59,7 @@
       "dependsOn": ["^build"]
     },
     "build": {
-      "dependsOn": [
-        "peggy",
-        "^build"
-      ]
+      "dependsOn": ["peggy", "^build"]
     }
   }
 }
