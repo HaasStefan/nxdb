@@ -118,11 +118,11 @@ importers:
   packages/cli:
     dependencies:
       '@nx-db/db':
-        specifier: ^0.0.3
-        version: 0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
+        specifier: ^0.1.0
+        version: link:../db
       '@nx-db/parser':
-        specifier: ^0.0.3
-        version: 0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
+        specifier: ^0.1.0
+        version: link:../parser
       commander:
         specifier: ^14.0.0
         version: 14.0.0
@@ -148,8 +148,8 @@ importers:
   packages/parser:
     dependencies:
       '@nx-db/db':
-        specifier: ^0.0.3
-        version: 0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
+        specifier: ^0.1.0
+        version: link:../db
       chalk:
         specifier: ^5.4.1
         version: 5.4.1
@@ -1104,12 +1104,6 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
-
-  '@nx-db/db@0.0.3':
-    resolution: {integrity: sha512-NaSZlty9QNMkNOLuIK5+lDq+eEhFRHJsrpuwnKYv5UqHf4FMk8nBjZ0mhEIBrXB/lmr7RstqXuIAbqGN9jkxYQ==}
-
-  '@nx-db/parser@0.0.3':
-    resolution: {integrity: sha512-QUbAS5wZZhhH82NdhZvNvrd2uM+t0/XuS1tTz1L0bFGyi2T0N0elxKe5WHDuUEVuJKtkMVZ42Q8oKgqsH829Vg==}
 
   '@nx/devkit@21.2.2':
     resolution: {integrity: sha512-fBeFY8wW9cb6AWjPGNZVa8nhYpDVu1hDPirxy+Z0Uxe3uo6BfwP9ZrUVIj99yGi2accEcvNx0ccygaa0aPzKng==}
@@ -4275,24 +4269,6 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
-
-  '@nx-db/db@0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))':
-    dependencies:
-      '@nx/devkit': 21.2.2(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
-      chalk: 5.4.1
-      ora: 8.2.0
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - nx
-
-  '@nx-db/parser@0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))':
-    dependencies:
-      '@nx-db/db': 0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
-      chalk: 5.4.1
-      ora: 8.2.0
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - nx
 
   '@nx/devkit@21.2.2(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))':
     dependencies:
