@@ -108,7 +108,6 @@ program.description('Runs an interactive query session').action(async () => {
     try {
       const queryParser = QueryParser.getInstance();
       const query = queryParser.parseFromQuery(queryFromPrompt);
-      console.log(query);
       const results = await runQueryAsync(query);
 
       if (results.total === 0) {

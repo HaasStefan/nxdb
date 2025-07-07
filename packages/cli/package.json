@@ -35,6 +35,10 @@
     "@nx-db/parser": "^0.2.0"
   },
   "nx": {
+    "tags": [
+      "cli",
+      "nxdb"
+    ],
     "targets": {
       "build": {
         "executor": "@nx/esbuild:esbuild",
