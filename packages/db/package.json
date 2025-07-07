@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/HaasStefan/nxdb/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/HaasStefan/nxdb#readme",
   "private": false,
   "type": "module",
