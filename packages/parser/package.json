@@ -1,6 +1,6 @@
 {
   "name": "@nx-db/parser",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NxQL parser for NxDB",
   "keywords": [
     "nxdb",
