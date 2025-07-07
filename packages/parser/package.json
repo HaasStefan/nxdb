@@ -1,6 +1,6 @@
 {
   "name": "@nx-db/parser",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "NxQL parser for NxDB",
   "keywords": [
     "nxdb",
@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nx-db/db": "^0.1.0",
+    "@nx-db/db": "^0.1.1",
     "chalk": "^5.4.1",
     "ora": "^8.2.0"
   },
