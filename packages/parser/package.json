@@ -51,11 +51,11 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nx-db/db": "workspace:*",
-    "chalk": "catalog:",
-    "ora": "catalog:"
+    "@nx-db/db": "^0.0.3",
+    "chalk": "^5.4.1",
+    "ora": "^8.2.0"
   },
   "devDependencies": {
-    "peggy": "catalog:"
+    "peggy": "^5.0.4"
   }
 }

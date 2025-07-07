@@ -4,103 +4,52 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-catalogs:
-  default:
-    '@nx/devkit':
-      specifier: 21.2.2
-      version: 21.2.2
-    '@nx/esbuild':
-      specifier: 21.2.2
-      version: 21.2.2
-    '@nx/eslint':
-      specifier: 21.2.2
-      version: 21.2.2
-    '@nx/eslint-plugin':
-      specifier: 21.2.2
-      version: 21.2.2
-    '@nx/jest':
-      specifier: 21.2.2
-      version: 21.2.2
-    '@nx/js':
-      specifier: 21.2.2
-      version: 21.2.2
-    '@nx/node':
-      specifier: 21.2.2
-      version: 21.2.2
-    '@nx/workspace':
-      specifier: 21.2.2
-      version: 21.2.2
-    '@types/prompts':
-      specifier: ^2.4.9
-      version: 2.4.9
-    axios:
-      specifier: ^1.6.0
-      version: 1.10.0
-    chalk:
-      specifier: ^5.4.1
-      version: 5.4.1
-    commander:
-      specifier: ^14.0.0
-      version: 14.0.0
-    nx:
-      specifier: 21.2.2
-      version: 21.2.2
-    ora:
-      specifier: ^8.2.0
-      version: 8.2.0
-    peggy:
-      specifier: ^5.0.4
-      version: 5.0.4
-    prompts:
-      specifier: ^2.4.2
-      version: 2.4.2
-
 importers:
 
   .:
     dependencies:
       '@nx/devkit':
-        specifier: 'catalog:'
+        specifier: ^21.2.2
         version: 21.2.2(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
       axios:
-        specifier: 'catalog:'
+        specifier: ^1.6.0
         version: 1.10.0
       chalk:
-        specifier: 'catalog:'
+        specifier: ^5.4.1
         version: 5.4.1
       commander:
-        specifier: 'catalog:'
+        specifier: ^14.0.0
         version: 14.0.0
       ora:
-        specifier: 'catalog:'
+        specifier: ^8.2.0
         version: 8.2.0
       prompts:
-        specifier: 'catalog:'
+        specifier: ^2.4.2
         version: 2.4.2
     devDependencies:
       '@eslint/js':
         specifier: ^9.8.0
         version: 9.30.1
       '@nx/esbuild':
-        specifier: 'catalog:'
+        specifier: ^21.2.2
         version: 21.2.2(@babel/traverse@7.28.0)(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17))(esbuild@0.19.12)(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
       '@nx/eslint':
-        specifier: 'catalog:'
+        specifier: ^21.2.2
         version: 21.2.2(@babel/traverse@7.28.0)(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17))(@zkochan/js-yaml@0.0.7)(eslint@9.30.1)(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
       '@nx/eslint-plugin':
-        specifier: 'catalog:'
+        specifier: ^21.2.2
         version: 21.2.2(@babel/traverse@7.28.0)(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17))(@typescript-eslint/parser@8.35.1(eslint@9.30.1)(typescript@5.8.3))(eslint-config-prettier@10.1.5(eslint@9.30.1))(eslint@9.30.1)(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))(typescript@5.8.3)
       '@nx/jest':
-        specifier: 'catalog:'
+        specifier: ^21.2.2
         version: 21.2.2(@babel/traverse@7.28.0)(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17))(@types/node@18.16.20)(babel-plugin-macros@3.1.0)(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))(ts-node@10.9.1(@swc/core@1.5.29(@swc/helpers@0.5.17))(@types/node@18.16.20)(typescript@5.8.3))(typescript@5.8.3)
       '@nx/js':
-        specifier: 'catalog:'
+        specifier: ^21.2.2
         version: 21.2.2(@babel/traverse@7.28.0)(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17))(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
       '@nx/node':
-        specifier: 'catalog:'
+        specifier: ^21.2.2
         version: 21.2.2(@babel/traverse@7.28.0)(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17))(@types/node@18.16.20)(@zkochan/js-yaml@0.0.7)(babel-plugin-macros@3.1.0)(eslint@9.30.1)(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))(ts-node@10.9.1(@swc/core@1.5.29(@swc/helpers@0.5.17))(@types/node@18.16.20)(typescript@5.8.3))(typescript@5.8.3)
       '@nx/workspace':
-        specifier: 'catalog:'
+        specifier: ^21.2.2
         version: 21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17))
       '@swc-node/register':
         specifier: ~1.9.1
@@ -121,7 +70,7 @@ importers:
         specifier: ~18.16.9
         version: 18.16.20
       '@types/prompts':
-        specifier: 'catalog:'
+        specifier: ^2.4.9
         version: 2.4.9
       esbuild:
         specifier: ^0.19.2
@@ -142,10 +91,10 @@ importers:
         specifier: ^2.1.0
         version: 2.4.0
       nx:
-        specifier: 'catalog:'
+        specifier: ^21.2.2
         version: 21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17))
       peggy:
-        specifier: 'catalog:'
+        specifier: ^5.0.4
         version: 5.0.4
       prettier:
         specifier: ^2.6.2
@@ -169,28 +118,28 @@ importers:
   packages/cli:
     dependencies:
       '@nx-db/db':
-        specifier: workspace:*
-        version: link:../db
+        specifier: ^0.0.3
+        version: 0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
       '@nx-db/parser':
-        specifier: workspace:*
-        version: link:../parser
+        specifier: ^0.0.3
+        version: 0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
       commander:
-        specifier: 'catalog:'
+        specifier: ^14.0.0
         version: 14.0.0
       prompts:
-        specifier: 'catalog:'
+        specifier: ^2.4.2
         version: 2.4.2
 
   packages/db:
     dependencies:
       '@nx/devkit':
-        specifier: 'catalog:'
+        specifier: ^21.2.2
         version: 21.2.2(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
       chalk:
-        specifier: 'catalog:'
+        specifier: ^5.4.1
         version: 5.4.1
       ora:
-        specifier: 'catalog:'
+        specifier: ^8.2.0
         version: 8.2.0
       tslib:
         specifier: ^2.3.0
@@ -199,20 +148,20 @@ importers:
   packages/parser:
     dependencies:
       '@nx-db/db':
-        specifier: workspace:*
-        version: link:../db
+        specifier: ^0.0.3
+        version: 0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
       chalk:
-        specifier: 'catalog:'
+        specifier: ^5.4.1
         version: 5.4.1
       ora:
-        specifier: 'catalog:'
+        specifier: ^8.2.0
         version: 8.2.0
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
     devDependencies:
       peggy:
-        specifier: 'catalog:'
+        specifier: ^5.0.4
         version: 5.0.4
 
 packages:
@@ -1155,6 +1104,12 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@nx-db/db@0.0.3':
+    resolution: {integrity: sha512-NaSZlty9QNMkNOLuIK5+lDq+eEhFRHJsrpuwnKYv5UqHf4FMk8nBjZ0mhEIBrXB/lmr7RstqXuIAbqGN9jkxYQ==}
+
+  '@nx-db/parser@0.0.3':
+    resolution: {integrity: sha512-QUbAS5wZZhhH82NdhZvNvrd2uM+t0/XuS1tTz1L0bFGyi2T0N0elxKe5WHDuUEVuJKtkMVZ42Q8oKgqsH829Vg==}
 
   '@nx/devkit@21.2.2':
     resolution: {integrity: sha512-fBeFY8wW9cb6AWjPGNZVa8nhYpDVu1hDPirxy+Z0Uxe3uo6BfwP9ZrUVIj99yGi2accEcvNx0ccygaa0aPzKng==}
@@ -4320,6 +4275,24 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
+
+  '@nx-db/db@0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))':
+    dependencies:
+      '@nx/devkit': 21.2.2(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
+      chalk: 5.4.1
+      ora: 8.2.0
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - nx
+
+  '@nx-db/parser@0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))':
+    dependencies:
+      '@nx-db/db': 0.0.3(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))
+      chalk: 5.4.1
+      ora: 8.2.0
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - nx
 
   '@nx/devkit@21.2.2(nx@21.2.2(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.5.29(@swc/helpers@0.5.17)))':
     dependencies:

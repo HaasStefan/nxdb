@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "ora": "catalog:",
-    "chalk": "catalog:",
-    "@nx/devkit": "catalog:"
+    "ora": "^8.2.0",
+    "chalk": "^5.4.1",
+    "@nx/devkit": "^21.2.2"
   }
 }
