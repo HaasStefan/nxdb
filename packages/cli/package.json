@@ -1,13 +1,16 @@
 {
-  "name": "@nxdb/cli",
+  "name": "@nx-db/cli",
   "version": "0.0.1",
   "private": true,
   "type": "module",
+  "bin": {
+    "nxdb": "./dist/main.js"
+  },
   "dependencies": {
     "prompts": "catalog:",
     "commander": "catalog:",
-    "@nxdb/db": "workspace:*",
-    "@nxdb/parser": "workspace:*"
+    "@nx-db/db": "workspace:*",
+    "@nx-db/parser": "workspace:*"
   },
   "nx": {
     "targets": {

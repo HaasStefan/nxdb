@@ -1,5 +1,5 @@
 {
-  "name": "@nxdb/parser",
+  "name": "@nx-db/parser",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nxdb/db": "workspace:*",
+    "@nx-db/db": "workspace:*",
     "chalk": "catalog:"
   },
   "devDependencies": {

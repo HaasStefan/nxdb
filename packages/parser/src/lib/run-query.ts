@@ -1,5 +1,5 @@
 import type { ComparisonExpression, Query } from './parser/parser.js';
-import { readDatabaseAsync, type ProjectsMap } from '@nxdb/db';
+import { readDatabaseAsync, type ProjectsMap } from '@nx-db/db';
 import type { QueryResult, Result } from './query-result.js';
 import { normalizeProject, omitBySelection } from './normalize-project.js';
 import { normalizeSelection } from './normalize-selection.js';

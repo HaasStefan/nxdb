@@ -1,4 +1,4 @@
-import type { Project } from '@nxdb/db';
+import type { Project } from '@nx-db/db';
 import type { Result } from './query-result.js';
 
 export function normalizeProject(project: Project): Result {

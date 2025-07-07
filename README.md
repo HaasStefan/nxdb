@@ -5,7 +5,7 @@
 <h1 align="center">NxDB</h1>
 
 <p align="center">
-  🌊 Query your Nx Project Graph with SQL
+  🌊 Query your Nx Project Graph like SQL
 </p>
 
 <p align="center">
@@ -80,7 +80,7 @@ Currently, in the MVP, only some very simple queries are supported.
 ### Example 1
 
 ```sql
-SELECT * FROM projects WHERE name = '@nxdb/cli'
+SELECT * FROM projects WHERE name = '@nx-db/cli'
 ```
 
 ### Example 2

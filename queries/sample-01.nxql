@@ -3,4 +3,4 @@ SELECT
 FROM
   projects
 WHERE
-  name = '@nxdb/cli'
+  name = '@nx-db/cli'

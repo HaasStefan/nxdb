@@ -2,7 +2,7 @@
 SELECT p.name
 FROM (
   SELECT * FROM projects AS project
-  WHERE project.name IN ['@nxdb/ui', '@nxdb/telemetry', '@nxdbauth']
+  WHERE project.name IN ['@nx-db/ui', '@nx-db/telemetry', '@nxdbauth']
   AND linesOfCode > 500
 ) AS p
 LET path = shortestPath('web', p.name)

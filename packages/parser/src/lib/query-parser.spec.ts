@@ -17,7 +17,7 @@ describe('QueryParser', () => {
         type: 'ComparisonExpression',
         left: 'name',
         operator: '=',
-        right: '@nxdb/cli',
+        right: '@nx-db/cli',
       },
     });
   });

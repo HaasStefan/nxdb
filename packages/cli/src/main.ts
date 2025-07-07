@@ -5,12 +5,12 @@ import {
   printSchema,
   readSchema,
   resetDatabaseAsync,
-} from '@nxdb/db';
+} from '@nx-db/db';
 import {
   printQueryResultAsTable,
   QueryParser,
   runQueryAsync,
-} from '@nxdb/parser';
+} from '@nx-db/parser';
 import { writeFileSync } from 'node:fs';
 import chalk from 'chalk';
 import prompts from 'prompts';

@@ -10,7 +10,7 @@ const swcJestConfig = JSON.parse(
 swcJestConfig.swcrc = false;
 
 export default {
-  displayName: '@nxdb/db',
+  displayName: '@nx-db/db',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

@@ -1,4 +1,4 @@
-import type { Primitive } from '@nxdb/db';
+import type { Primitive } from '@nx-db/db';
 
 export type Result = Record<string, Primitive>;
 

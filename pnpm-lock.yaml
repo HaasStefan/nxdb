@@ -168,10 +168,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@nxdb/db':
+      '@nx-db/db':
         specifier: workspace:*
         version: link:../db
-      '@nxdb/parser':
+      '@nx-db/parser':
         specifier: workspace:*
         version: link:../parser
       commander:
@@ -198,7 +198,7 @@ importers:
 
   packages/parser:
     dependencies:
-      '@nxdb/db':
+      '@nx-db/db':
         specifier: workspace:*
         version: link:../db
       chalk:
