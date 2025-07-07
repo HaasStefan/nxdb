@@ -2,8 +2,13 @@ Start
   = _ query:Query _ { return query; }
 
 Query
-  = "SELECT"i _ selection:Selection _ "FROM"i _ source:Identifier _ "WHERE"i _ condition:OrExpression {
-      return { type: "Query", selection, source, condition };
+  = "SELECT"i _ selection:Selection _ "FROM"i _ source:Identifier _ whereClause:WhereClause? {
+      return { type: "Query", selection, source, condition: whereClause ? whereClause.condition : null };
+    }
+
+WhereClause
+  = "WHERE"i _ condition:OrExpression {
+      return { condition };
     }
 
 Selection

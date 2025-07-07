@@ -51,6 +51,14 @@ export async function runQueryAsync(query: Query): Promise<QueryResult> {
         selection: normalizedSelection,
       };
     }
+  } else {
+    // If no condition is specified, return all projects
+    results.push(
+      ...Object.values(projects).map(
+        (project) => normalizeProject(project),
+        normalizedSelection
+      )
+    );
   }
 
   const normalizedResults = results.map((result) =>
