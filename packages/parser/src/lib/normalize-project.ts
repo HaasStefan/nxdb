@@ -32,8 +32,12 @@ export function omitBySelection(
 
   const result: Partial<Result> = {};
   selection.forEach((key) => {
-    if (key in selection) {
+    if (key in project) {
       result[key] = project[key];
+    } else {
+      throw new Error(
+        `Invalid selection key: ${key}. Available keys are: ${Object.keys(project).join(', ')}`
+      );
     }
   });
 

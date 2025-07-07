@@ -108,7 +108,7 @@ program.description('Runs an interactive query session').action(async () => {
     try {
       const queryParser = QueryParser.getInstance();
       const query = queryParser.parseFromQuery(queryFromPrompt);
-      console.log(chalk.blue('Running query...'));
+      console.log(query);
       const results = await runQueryAsync(query);
 
       if (results.total === 0) {
@@ -120,8 +120,11 @@ program.description('Runs an interactive query session').action(async () => {
           parseInt(process.env.MAX_ROWS || '20', 10)
         );
       }
-    } catch {
+    } catch (error) {
       console.error(chalk.red('Error running query!'));
+      console.error(chalk.red(
+        error instanceof Error ? error.message : 'An unknown error occurred'
+      ));
     }
   }
 });

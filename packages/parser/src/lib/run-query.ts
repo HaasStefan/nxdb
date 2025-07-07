@@ -23,7 +23,7 @@ export async function runQueryAsync(query: Query): Promise<QueryResult> {
     );
   }
 
-  if (selection.type !== 'All' && typeof selection.type !== 'string') {
+  if (selection.type !== 'All' && selection.type !== 'List') {
     throw new Error(
       `Unsupported selection type: ${selection.type}. Currently only '*' is supported.`
     );

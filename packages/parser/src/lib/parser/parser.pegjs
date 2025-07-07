@@ -12,8 +12,13 @@ WhereClause
     }
 
 Selection
-  = _ "*" _ { return { type: "All" }; }
-
+  = "*" { return { type: "All" }; }
+  / head:Identifier tail:(_ "," _ Identifier)* {
+      return {
+        type: "List",
+        values: [head, ...tail.map(([,, , id]) => id)]
+      };
+    }
 Identifier
   = $([a-zA-Z_][a-zA-Z0-9_]*)
 

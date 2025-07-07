@@ -11,9 +11,10 @@ export interface Query {
 
 export interface Selection {
   type: SelectionType;
+  values?: string[];
 }
 
-export type SelectionType = 'All' | string;
+export type SelectionType = 'All' | 'List';
 
 export type SourceType = 'projects' | string;
 
