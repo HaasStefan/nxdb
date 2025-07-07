@@ -36,8 +36,8 @@ nx-workspace/
 
 # Installation
 
-```
-npm install -D nxdb
+```plaintext
+npm install -D @nx-db/cli
 ```
 
 # Getting Started
