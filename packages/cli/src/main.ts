@@ -13,7 +13,8 @@ import {
 } from '@nx-db/parser';
 import { writeFileSync } from 'node:fs';
 import chalk from 'chalk';
-import prompts from 'prompts';
+import readline from 'node:readline';
+import { restoreHistory, saveCommandToHistory } from './history.js';
 
 program
   .name('nxdb')
@@ -74,58 +75,86 @@ program
   });
 
 program.description('Runs an interactive query session').action(async () => {
-  while (true) {
-    const response = await prompts(
-      {
-        type: 'text',
-        name: 'query',
-        message: 'Query:',
-        validate: (value) => {
-          if (value.trim() === '') {
-            return 'Query cannot be empty';
-          }
-          return true;
-        },
-      },
-      {
-        onCancel: () => {
-          console.log(chalk.green('Exiting interactive mode.'));
-          process.exit(0);
-        },
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    prompt: chalk.magenta('>> '),
+    history: restoreHistory().reverse(), // Load history in reverse order
+  });
+
+
+  const run = async () => {
+    console.clear();
+    rl.prompt();
+
+    rl.on('line', async (input: any) => {
+      const queryFromPrompt = input.trim();
+      
+      // Add to history unless empty
+      if (queryFromPrompt !== '') {
+        saveCommandToHistory(queryFromPrompt);
       }
-    );
 
-    const queryFromPrompt = response.query.trim();
-    if (
-      queryFromPrompt.toLowerCase() === 'exit' ||
-      queryFromPrompt.toLowerCase() === 'stop' ||
-      queryFromPrompt.toLowerCase() === 'quit'
-    ) {
-      console.log(chalk.green('Exiting interactive mode.'));
-      process.exit(0);
-    }
+      // Exit logic
+      if (['exit', 'stop', 'quit'].includes(queryFromPrompt.toLowerCase())) {
+        console.log(chalk.green('Exiting interactive mode.'));
+        rl.close();
+        process.exit(0);
+      }
 
-    try {
-      const queryParser = QueryParser.getInstance();
-      const query = queryParser.parseFromQuery(queryFromPrompt);
-      const results = await runQueryAsync(query);
+      // Clear screen
+      if (['clear', 'cls'].includes(queryFromPrompt.toLowerCase())) {
+        console.clear();
+        rl.prompt();
+        return;
+      }
 
-      if (results.total === 0) {
-        console.log(chalk.yellow('No results found.'));
-      } else {
-        printQueryResultAsTable(
-          results,
-          parseInt(process.env.MAX_COLUMNS || '6', 10),
-          parseInt(process.env.MAX_ROWS || '20', 10)
+      // Validation
+      if (queryFromPrompt === '') {
+        console.log(chalk.red('Query cannot be empty.'));
+        rl.prompt();
+        return;
+      }
+
+      // Run query
+      try {
+        rl.pause(); // suspend input so output doesn't clash
+        const queryParser = QueryParser.getInstance();
+        const query = queryParser.parseFromQuery(queryFromPrompt);
+        const results = await runQueryAsync(query);
+
+        if (results.total === 0) {
+          console.log(chalk.yellow('No results found.'));
+        } else {
+          printQueryResultAsTable(
+            results,
+            parseInt(process.env.MAX_COLUMNS || '6', 10),
+            parseInt(process.env.MAX_ROWS || '20', 10)
+          );
+        }
+      } catch (error) {
+        console.error(chalk.red('Error running query!'));
+        console.error(
+          chalk.red(
+            error instanceof Error ? error.message : 'An unknown error occurred'
+          )
         );
       }
-    } catch (error) {
-      console.error(chalk.red('Error running query!'));
-      console.error(chalk.red(
-        error instanceof Error ? error.message : 'An unknown error occurred'
-      ));
-    }
-  }
+
+      rl.resume(); // resume input
+      readline.emitKeypressEvents(process.stdin);
+      if (process.stdin.isTTY) process.stdin.setRawMode(true);
+      rl.prompt();
+    });
+
+    rl.on('SIGINT', () => {
+      console.log(chalk.green('\nExiting interactive mode.'));
+      rl.close();
+      process.exit(0);
+    });
+  };
+
+  run();
 });
 
 program

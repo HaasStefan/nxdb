@@ -35,66 +35,72 @@ export async function runQueryAsync(query: Query): Promise<QueryResult> {
   }
 
   const spinner = ora(`Running query...`).start();
+  try {
+    const normalizedSelection = normalizeSelection(selection);
 
-  const normalizedSelection = normalizeSelection(selection);
+    if (condition) {
+      const shouldAccessByKey =
+        condition.type === 'ComparisonExpression' &&
+        condition.operator === '=' &&
+        condition.left === 'name';
+      if (shouldAccessByKey) {
+        const results = handleNameEqualComparisonExpression(
+          projects,
+          condition
+        ).map((project) => omitBySelection(project, normalizedSelection));
 
-  if (condition) {
-    const shouldAccessByKey =
-      condition.type === 'ComparisonExpression' &&
-      condition.operator === '=' &&
-      condition.left === 'name';
-    if (shouldAccessByKey) {
-      const results = handleNameEqualComparisonExpression(
-        projects,
-        condition
-      ).map((project) => omitBySelection(project, normalizedSelection));
-
-      spinner.succeed('Query executed successfully.');
-      return {
-        results,
-        total: results.length,
-        selection: normalizedSelection,
-      };
-    } else {
-      let results: Partial<Result>[] = [];
-      switch (condition.type) {
-        case 'ComparisonExpression':
-          results = handleComparisonExpression(
-            projects,
-            condition as ComparisonExpression
-          ).map((project) => omitBySelection(project, normalizedSelection));
-          spinner.succeed('Query executed successfully.');
-          return {
-            results,
-            total: results.length,
-            selection: normalizedSelection,
-          };
-        default:
-          throw new Error(
-            `Unsupported condition type: ${condition.type}. Currently only 'ComparisonExpression' is supported.`
-          );
+        spinner.succeed('Query executed successfully.');
+        return {
+          results,
+          total: results.length,
+          selection: normalizedSelection,
+        };
+      } else {
+        let results: Partial<Result>[] = [];
+        switch (condition.type) {
+          case 'ComparisonExpression':
+            results = handleComparisonExpression(
+              projects,
+              condition as ComparisonExpression
+            ).map((project) => omitBySelection(project, normalizedSelection));
+            spinner.succeed('Query executed successfully.');
+            return {
+              results,
+              total: results.length,
+              selection: normalizedSelection,
+            };
+          default:
+            throw new Error(
+              `Unsupported condition type: ${condition.type}. Currently only 'ComparisonExpression' is supported.`
+            );
+        }
       }
+    } else {
+      // If no condition is specified, return all projects
+      results.push(
+        ...Object.values(projects).map(
+          (project) => normalizeProject(project),
+          normalizedSelection
+        )
+      );
     }
-  } else {
-    // If no condition is specified, return all projects
-    results.push(
-      ...Object.values(projects).map(
-        (project) => normalizeProject(project),
-        normalizedSelection
-      )
+
+    const normalizedResults = results.map((result) =>
+      omitBySelection(result, normalizedSelection)
+    );
+
+    spinner.succeed('Query executed successfully.');
+    return {
+      results: normalizedResults,
+      total: normalizedResults.length,
+      selection: normalizedSelection,
+    };
+  } catch (error) {
+    spinner.fail(`Error executing query!`);
+    throw new Error(
+      `Error executing query: ${error instanceof Error ? error.message : error}`
     );
   }
-
-  const normalizedResults = results.map((result) =>
-    omitBySelection(result, normalizedSelection)
-  );
-
-  spinner.succeed('Query executed successfully.');
-  return {
-    results: normalizedResults,
-    total: normalizedResults.length,
-    selection: normalizedSelection,
-  };
 }
 
 /**
