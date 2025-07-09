@@ -6,3 +6,5 @@ export { initializeDatabaseAsync } from './lib/initialize.js';
 export { readDatabaseAsync } from './lib/persistence.js';
 export type { Primitive } from './lib/utils/get-custom-fields.js';
 export type { Project, ProjectsMap } from './lib/project.js';
+
+export { flattenProject } from './lib/project.js';

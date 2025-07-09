@@ -1,5 +1,10 @@
 import type { ComparisonExpression, Query } from './parser/parser.js';
-import { readDatabaseAsync, type ProjectsMap } from '@nx-db/db';
+import {
+  flattenProject,
+  Primitive,
+  readDatabaseAsync,
+  type ProjectsMap,
+} from '@nx-db/db';
 import type { QueryResult, Result } from './query-result.js';
 import { normalizeProject, omitBySelection } from './normalize-project.js';
 import { normalizeSelection } from './normalize-selection.js';
@@ -50,6 +55,25 @@ export async function runQueryAsync(query: Query): Promise<QueryResult> {
         total: results.length,
         selection: normalizedSelection,
       };
+    } else {
+      let results: Partial<Result>[] = [];
+      switch (condition.type) {
+        case 'ComparisonExpression':
+          results = handleComparisonExpression(
+            projects,
+            condition as ComparisonExpression
+          ).map((project) => omitBySelection(project, normalizedSelection));
+          spinner.succeed('Query executed successfully.');
+          return {
+            results,
+            total: results.length,
+            selection: normalizedSelection,
+          };
+        default:
+          throw new Error(
+            `Unsupported condition type: ${condition.type}. Currently only 'ComparisonExpression' is supported.`
+          );
+      }
     }
   } else {
     // If no condition is specified, return all projects
@@ -101,4 +125,71 @@ function handleNameEqualComparisonExpression(
   }
 
   return results;
+}
+
+function handleComparisonExpression(
+  projects: ProjectsMap,
+  comparisonExpression: ComparisonExpression
+): Result[] {
+  const results: Result[] = [];
+  const { left, operator, right } = comparisonExpression;
+
+  for (const project of Object.values(projects)) {
+    const normalizedProject = flattenProject(project);
+    if (left in normalizedProject) {
+      const leftValue = normalizedProject[left as keyof typeof project];
+      let conditionMet = false;
+
+      switch (operator) {
+        case '=':
+          conditionMet = leftValue === right;
+          break;
+        case '!=':
+          conditionMet = leftValue !== right;
+          break;
+        case '<':
+          throwIfNotNumberComparison(leftValue, right, operator);
+          conditionMet = leftValue < right;
+          break;
+        case '>':
+          throwIfNotNumberComparison(leftValue, right, operator);
+          conditionMet = leftValue > right;
+          break;
+        case '<=':
+          throwIfNotNumberComparison(leftValue, right, operator);
+          conditionMet = leftValue <= right;
+          break;
+        case '>=':
+          throwIfNotNumberComparison(leftValue, right, operator);
+          conditionMet = leftValue >= right;
+          break;
+        default:
+          throw new Error(`Unsupported operator: ${operator}`);
+      }
+
+      if (conditionMet) {
+        results.push(normalizeProject(project));
+      }
+    } else {
+      throw new Error(
+        `Invalid condition left value: ${left}. Project does not have this field.`
+      );
+    }
+  }
+
+  return results;
+}
+
+function throwIfNotNumberComparison(
+  leftValue: Primitive,
+  rightValue: Primitive,
+  operator: string
+): leftValue is number & typeof rightValue {
+  if (typeof leftValue !== 'number' || typeof rightValue !== 'number') {
+    throw new Error(
+      `Invalid comparison: ${leftValue} ${operator} ${rightValue}. Both sides must be numbers.`
+    );
+  }
+
+  return true;
 }
