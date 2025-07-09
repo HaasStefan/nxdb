@@ -1,6 +1,6 @@
 {
   "name": "@nx-db/cli",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Command line interface for NxDB",
   "keywords": [
     "nxdb",
@@ -31,8 +31,8 @@
   "dependencies": {
     "prompts": "^2.4.2",
     "commander": "^14.0.0",
-    "@nx-db/db": "^0.2.1",
-    "@nx-db/parser": "^0.2.1"
+    "@nx-db/db": "^0.3.0",
+    "@nx-db/parser": "^0.3.0"
   },
   "nx": {
     "tags": [
