@@ -1,4 +1,8 @@
-import type { ComparisonExpression, Query } from './parser/parser.js';
+import type {
+  ComparisonExpression,
+  InExpression,
+  Query,
+} from './parser/parser.js';
 import {
   flattenProject,
   Primitive,
@@ -69,10 +73,19 @@ export async function runQueryAsync(query: Query): Promise<QueryResult> {
               total: results.length,
               selection: normalizedSelection,
             };
+          case 'InExpression':
+            results = handleInExpression(
+              projects,
+              condition as InExpression
+            ).map((project) => omitBySelection(project, normalizedSelection));
+            spinner.succeed('Query executed successfully.');
+            return {
+              results,
+              total: results.length,
+              selection: normalizedSelection,
+            };
           default:
-            throw new Error(
-              `Unsupported condition type: ${condition.type}. Currently only 'ComparisonExpression' is supported.`
-            );
+            throw new Error(`Unsupported condition type.`);
         }
       }
     } else {
@@ -198,4 +211,31 @@ function throwIfNotNumberComparison(
   }
 
   return true;
+}
+
+function handleInExpression(
+  projects: ProjectsMap,
+  inExpression: InExpression
+): Result[] {
+  const { value, target } = inExpression;
+  const results: Result[] = [];
+  for (const project of Object.values(projects)) {
+    const normalizedProject = flattenProject(project);
+    if (target in normalizedProject) {
+      if (!Array.isArray(normalizedProject[target])) {
+        throw new Error(
+          `Invalid condition target value: ${target}. Expected an array.`
+        );
+      }
+      const targetValue = normalizedProject[target] as Primitive[];
+      if (targetValue.includes(value)) {
+        results.push(normalizeProject(project));
+      }
+    } else {
+      throw new Error(
+        `Invalid condition target value: ${target}. Project does not have this field.`
+      );
+    }
+  }
+  return results;
 }
