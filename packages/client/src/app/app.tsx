@@ -16,7 +16,7 @@ export function App() {
           <Panel defaultSize={70} minSize={10}>
             <QueryEditor />
           </Panel>
-          <PanelResizeHandle className='h-1 bg-gray-300 hover:bg-gray-500' />
+          <PanelResizeHandle className='h-1 bg-slate-600 hover:h-2' />
           <Panel defaultSize={30} minSize={20}>
             <ResultView />
           </Panel>
