@@ -1,5 +1,11 @@
 {
   "name": "@nx-db/client",
   "version": "0.0.1",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-router-dom": "6.29.0",
+    "shadcn": "^2.9.0"
+  }
 }

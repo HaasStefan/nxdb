@@ -14,9 +14,12 @@
     "ora": "^8.2.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-router-dom": "6.29.0"
+    "react-router-dom": "6.29.0",
+    "shadcn": "^2.9.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
     "@eslint/js": "^9.8.0",
     "@nx/esbuild": "^21.2.2",
     "@nx/eslint": "^21.2.2",
@@ -24,9 +27,9 @@
     "@nx/jest": "^21.2.2",
     "@nx/js": "21.2.3",
     "@nx/node": "^21.2.2",
-    "@nx/react": "^21.2.3",
-    "@nx/vite": "21.2.3",
-    "@nx/web": "21.2.3",
+    "@nx/react": "21.2.3",
+    "@nx/vite": "^21.2.2",
+    "@nx/web": "^21.2.2",
     "@nx/workspace": "^21.2.2",
     "@swc-node/register": "~1.9.1",
     "@swc/cli": "~0.6.0",
