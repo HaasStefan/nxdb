@@ -11,13 +11,13 @@ export function App() {
         <SideCar />
       </section>
 
-      <main className="p-4 w-full h-screen">
+      <main className="w-full h-screen">
         <PanelGroup direction="vertical">
-          <Panel>
+          <Panel defaultSize={70} minSize={10}>
             <QueryEditor />
           </Panel>
-          <PanelResizeHandle className='h-1 bg-gray-400' />
-          <Panel>
+          <PanelResizeHandle className='h-1 bg-gray-300 hover:bg-gray-500' />
+          <Panel defaultSize={30} minSize={20}>
             <ResultView />
           </Panel>
         </PanelGroup>
