@@ -13,7 +13,7 @@ export function App() {
 
       <main className="w-full h-screen">
         <PanelGroup direction="vertical">
-          <Panel defaultSize={70} minSize={10}>
+          <Panel defaultSize={70} minSize={20}>
             <QueryEditor />
           </Panel>
           <PanelResizeHandle className='h-1 bg-slate-600 hover:h-2' />

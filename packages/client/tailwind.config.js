@@ -33,6 +33,7 @@ module.exports = {
           operator: '#c792ea',
           cursor: '#80a4c2',
           whitespace: '#5f7e97',
+          green: '#addb67'
         },
       },
       backgroundColor: {
@@ -40,12 +41,16 @@ module.exports = {
         'night-owl-secondary': '#010e17',
         'night-owl-selection': '#1d3b53',
         'night-owl-accent': '#5e81ce52',
+        'night-owl-muted': '#4b6479',
+        'night-owl-comment': '#637777',
+        'night-owl-green': '#addb67',
       },
       textColor: {
         'night-owl': '#d6deeb',
         'night-owl-muted': '#4b6479',
         'night-owl-accent': '#c5e4fd',
         'night-owl-comment': '#637777',
+        'night-owl-green': '#addb67',
       },
     },
   },
